@@ -15,6 +15,13 @@ export default async function HomePage() {
     .order('vote_count', { ascending: false })
     .limit(6) as { data: Flow[] | null }
 
+  const { data: recentFlows } = await supabase
+    .from('flows')
+    .select('*')
+    .eq('status', 'published')
+    .order('created_at', { ascending: false })
+    .limit(12) as { data: Flow[] | null }
+
   return (
     <div>
       {/* Hero */}
@@ -82,6 +89,44 @@ export default async function HomePage() {
           <Link href="/flow-of-the-day">See Today&apos;s Flow</Link>
         </Button>
       </section>
+
+      {/* Flow showcase */}
+      {recentFlows && recentFlows.length > 0 && (
+        <section className="mb-8">
+          <div className="flex items-center justify-between mb-4">
+            <h2 className="text-lg font-semibold text-muted-foreground">Recently added flows</h2>
+            <Button asChild variant="ghost" size="sm">
+              <Link href="/flows">Browse all <ArrowRight className="h-3.5 w-3.5 ml-1" /></Link>
+            </Button>
+          </div>
+          <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x scrollbar-none">
+            {recentFlows.map(flow => (
+              <Link
+                key={flow.id}
+                href={`/flows/${flow.id}`}
+                className="flex-shrink-0 w-56 snap-start border border-border rounded-xl p-4 bg-card hover:border-primary/50 hover:shadow-md transition-all group"
+              >
+                <span className="inline-block text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full mb-3">
+                  {flow.category}
+                </span>
+                <h3 className="font-semibold text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2 mb-3">
+                  {flow.title}
+                </h3>
+                <div className="flex flex-wrap gap-1">
+                  {flow.tools.slice(0, 3).map(tool => (
+                    <span key={tool} className="text-xs bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full">
+                      {tool}
+                    </span>
+                  ))}
+                  {flow.tools.length > 3 && (
+                    <span className="text-xs text-muted-foreground">+{flow.tools.length - 3}</span>
+                  )}
+                </div>
+              </Link>
+            ))}
+          </div>
+        </section>
+      )}
     </div>
   )
 }

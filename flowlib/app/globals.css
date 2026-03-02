@@ -50,3 +50,12 @@
   background: hsl(var(--card));
   font-size: 13px;
 }
+
+@layer utilities {
+  .scrollbar-none {
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
+}
