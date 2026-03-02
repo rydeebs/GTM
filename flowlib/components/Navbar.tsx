@@ -1,33 +1,67 @@
+'use client'
+
 import Link from 'next/link'
+import { useEffect, useState } from 'react'
 import { Zap } from 'lucide-react'
-import { Button } from '@/components/ui/button'
 
 export function Navbar() {
-  return (
-    <nav className="border-b border-border bg-background/80 backdrop-blur sticky top-0 z-40">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-14 flex items-center justify-between">
-        <div className="flex items-center gap-8">
-          <Link href="/" className="flex items-center gap-2 font-bold text-lg text-primary">
-            <Zap className="h-5 w-5" />
+  const [scrolled, setScrolled] = useState(false)
+
+  useEffect(() => {
+    const handler = () => setScrolled(window.scrollY > 60)
+    handler()
+    window.addEventListener('scroll', handler, { passive: true })
+    return () => window.removeEventListener('scroll', handler)
+  }, [])
+
+  const navLinks = (
+    <>
+      <Link href="/flows"         className="text-sm hover:opacity-60 transition-opacity">Library</Link>
+      <Link href="/flow-of-the-day" className="text-sm hover:opacity-60 transition-opacity">Flow of the Day</Link>
+      <Link href="/ideas"         className="text-sm hover:opacity-60 transition-opacity">Ideas</Link>
+    </>
+  )
+
+  /* ── Floating pill (scrolled) ───────────────────────────────────── */
+  if (scrolled) {
+    return (
+      <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
+        <nav className="flex items-center gap-6 bg-[#0d0d0d] text-white rounded-full px-6 py-2.5 shadow-2xl shadow-black/20">
+          <Link href="/" className="flex items-center gap-1.5 font-semibold text-sm">
+            <Zap className="h-4 w-4 text-[#c5f500]" />
             RunGTM
           </Link>
-          <div className="hidden sm:flex items-center gap-1">
-            <Link href="/flows" className="px-3 py-1.5 text-sm rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors">
-              Library
-            </Link>
-            <Link href="/flow-of-the-day" className="px-3 py-1.5 text-sm rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors">
-              Flow of the Day
-            </Link>
-            <Link href="/ideas" className="px-3 py-1.5 text-sm rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors">
-              Ideas
-            </Link>
+          <div className="hidden sm:flex items-center gap-5">
+            {navLinks}
           </div>
+          <Link
+            href="/submit"
+            className="ml-2 text-xs font-semibold bg-[#c5f500] text-black px-4 py-1.5 rounded-full hover:bg-[#d4ff00] transition-colors"
+          >
+            Submit a Flow
+          </Link>
+        </nav>
+      </div>
+    )
+  }
+
+  /* ── Transparent top bar (at top) ───────────────────────────────── */
+  return (
+    <nav className="fixed top-0 left-0 right-0 z-50 px-6 sm:px-10 py-5">
+      <div className="max-w-7xl mx-auto flex items-center justify-between">
+        <Link href="/" className="flex items-center gap-2 font-semibold text-base">
+          <Zap className="h-4 w-4 text-primary" />
+          RunGTM
+        </Link>
+        <div className="hidden sm:flex items-center gap-6">
+          {navLinks}
         </div>
-        <div className="flex items-center gap-3">
-          <Button asChild size="sm">
-            <Link href="/submit">Submit a Flow</Link>
-          </Button>
-        </div>
+        <Link
+          href="/submit"
+          className="text-xs font-semibold border border-foreground/20 px-4 py-1.5 rounded-full hover:bg-foreground/5 transition-colors"
+        >
+          Submit a Flow
+        </Link>
       </div>
     </nav>
   )

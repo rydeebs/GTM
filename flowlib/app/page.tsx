@@ -1,8 +1,7 @@
 import Link from 'next/link'
-import { ArrowRight, Zap, Star, Search } from 'lucide-react'
-import { Button } from '@/components/ui/button'
+import { ArrowRight, ArrowUp, Bookmark, GitFork } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
-import { FlowCard } from '@/components/FlowCard'
+import { WebGLBackground } from '@/components/WebGLBackground'
 import type { Flow } from '@/lib/types'
 
 export default async function HomePage() {
@@ -23,110 +22,238 @@ export default async function HomePage() {
     .limit(12) as { data: Flow[] | null }
 
   return (
-    <div>
-      {/* Hero */}
-      <section className="text-center py-20 px-4">
-        <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm px-4 py-1.5 rounded-full mb-6 font-medium">
-          <Zap className="h-4 w-4" />
-          RunGTM
-        </div>
-        <h1 className="text-5xl font-bold tracking-tight mb-5 max-w-3xl mx-auto leading-tight">
-          Discover & share the best <span className="text-primary">GTM automation flows</span>
-        </h1>
-        <p className="text-xl text-muted-foreground max-w-2xl mx-auto mb-8">
-          Browse hundreds of automation flows built with Zapier, Clay, Make, and more.
-          Upvote, save, fork, and get one great flow delivered to your inbox every day.
-        </p>
-        <div className="flex items-center justify-center gap-3">
-          <Button asChild size="lg">
-            <Link href="/flows">Browse Flows <ArrowRight className="h-4 w-4 ml-1" /></Link>
-          </Button>
-          <Button asChild variant="outline" size="lg">
-            <Link href="/submit">Submit Your Flow</Link>
-          </Button>
-        </div>
-      </section>
+    <div className="-mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
 
-      {/* Stats bar */}
-      <section className="grid grid-cols-3 gap-6 max-w-2xl mx-auto mb-16 text-center">
-        {[
-          { label: 'Flows', value: '500+' },
-          { label: 'Tools covered', value: '40+' },
-          { label: 'Subscribers', value: '2k+' },
-        ].map(stat => (
-          <div key={stat.label} className="p-6 rounded-xl border border-border bg-card">
-            <div className="text-3xl font-bold text-primary">{stat.value}</div>
-            <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
-          </div>
-        ))}
-      </section>
+      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden min-h-[88vh] flex flex-col items-center justify-center px-6 pt-28 pb-20">
+        <WebGLBackground variant="hero" />
 
-      {/* Top flows */}
-      {topFlows && topFlows.length > 0 && (
-        <section className="mb-16">
-          <div className="flex items-center justify-between mb-6">
-            <h2 className="text-2xl font-bold flex items-center gap-2">
-              <Star className="h-5 w-5 text-primary" />
-              Top Flows
-            </h2>
-            <Button asChild variant="ghost" size="sm">
-              <Link href="/flows?sort=top">View all <ArrowRight className="h-3.5 w-3.5 ml-1" /></Link>
-            </Button>
+        <div className="relative z-10 text-center max-w-5xl mx-auto">
+          {/* Badge */}
+          <div className="inline-flex items-center border border-foreground/20 rounded-full px-4 py-1 mb-8">
+            <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-foreground/50">
+              For GTM Teams
+            </span>
           </div>
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {topFlows.map(flow => <FlowCard key={flow.id} flow={flow} />)}
-          </div>
-        </section>
-      )}
 
-      {/* CTA */}
-      <section className="rounded-2xl bg-primary text-primary-foreground p-12 text-center mb-8">
-        <h2 className="text-3xl font-bold mb-3">Get one great flow, every day</h2>
-        <p className="text-primary-foreground/80 mb-6 max-w-lg mx-auto">
-          Subscribe to the Flow of the Day digest — a hand-picked automation explained in detail, delivered to your inbox.
-        </p>
-        <Button asChild variant="secondary" size="lg">
-          <Link href="/flow-of-the-day">See Today&apos;s Flow</Link>
-        </Button>
-      </section>
+          {/* Headline — mixed weights like workflows.io */}
+          <h1 className="text-6xl sm:text-7xl lg:text-[5.5rem] font-black leading-[0.95] tracking-tight mb-8">
+            <span className="block">Discover &amp; run</span>
+            <span className="block text-foreground/25 font-light italic">
+              the best GTM
+            </span>
+            <span className="block">automation flows</span>
+          </h1>
 
-      {/* Flow showcase */}
-      {recentFlows && recentFlows.length > 0 && (
-        <section className="mb-8">
-          <div className="flex items-center justify-between mb-4">
-            <h2 className="text-lg font-semibold text-muted-foreground">Recently added flows</h2>
-            <Button asChild variant="ghost" size="sm">
-              <Link href="/flows">Browse all <ArrowRight className="h-3.5 w-3.5 ml-1" /></Link>
-            </Button>
+          <p className="text-lg text-foreground/50 max-w-xl mx-auto mb-10 leading-relaxed">
+            Browse, fork, and deploy automation flows built with Zapier, Clay,
+            Make, Apollo, and more — curated by the GTM community.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex items-center justify-center gap-3 mb-12">
+            <Link
+              href="/flows"
+              className="inline-flex items-center gap-2 bg-[#c5f500] text-black text-sm font-bold px-7 py-3 rounded-full hover:bg-[#d4ff00] transition-colors"
+            >
+              Browse Flows <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/submit"
+              className="inline-flex items-center gap-2 border border-foreground/20 text-sm font-medium px-7 py-3 rounded-full hover:bg-foreground/5 transition-colors"
+            >
+              Submit a Flow
+            </Link>
           </div>
-          <div className="flex gap-3 overflow-x-auto pb-3 -mx-4 px-4 snap-x scrollbar-none">
-            {recentFlows.map(flow => (
-              <Link
-                key={flow.id}
-                href={`/flows/${flow.id}`}
-                className="flex-shrink-0 w-56 snap-start border border-border rounded-xl p-4 bg-card hover:border-primary/50 hover:shadow-md transition-all group"
+
+          {/* Tool tags */}
+          <div className="flex flex-wrap items-center justify-center gap-2">
+            {['Zapier', 'Clay', 'Make', 'Apollo', 'n8n', 'HeyReach', 'Instantly', 'Smartlead'].map(tool => (
+              <span
+                key={tool}
+                className="text-xs border border-foreground/12 text-foreground/40 px-3 py-1 rounded-full"
               >
-                <span className="inline-block text-xs font-medium text-primary bg-primary/10 px-2 py-0.5 rounded-full mb-3">
-                  {flow.category}
-                </span>
-                <h3 className="font-semibold text-sm leading-snug group-hover:text-primary transition-colors line-clamp-2 mb-3">
-                  {flow.title}
-                </h3>
-                <div className="flex flex-wrap gap-1">
-                  {flow.tools.slice(0, 3).map(tool => (
-                    <span key={tool} className="text-xs bg-secondary text-secondary-foreground px-2 py-0.5 rounded-full">
-                      {tool}
-                    </span>
-                  ))}
-                  {flow.tools.length > 3 && (
-                    <span className="text-xs text-muted-foreground">+{flow.tools.length - 3}</span>
-                  )}
-                </div>
-              </Link>
+                {tool}
+              </span>
             ))}
           </div>
+        </div>
+      </section>
+
+      {/* ── Stats ─────────────────────────────────────────────────────── */}
+      <section className="border-t border-dashed border-foreground/10">
+        <div className="max-w-7xl mx-auto grid grid-cols-3 divide-x divide-dashed divide-foreground/10">
+          {[
+            { value: '500+', label: 'Automation Flows' },
+            { value: '40+',  label: 'Tools Covered'    },
+            { value: '2k+',  label: 'Subscribers'      },
+          ].map(stat => (
+            <div key={stat.label} className="py-10 text-center">
+              <div className="text-4xl font-black tracking-tight">{stat.value}</div>
+              <div className="text-[11px] font-semibold tracking-widest uppercase text-foreground/40 mt-2">
+                {stat.label}
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
+      {/* ── Top Flows ─────────────────────────────────────────────────── */}
+      {topFlows && topFlows.length > 0 && (
+        <section className="border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-end justify-between mb-10">
+              <div>
+                <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-foreground/40 mb-2">
+                  Community picks
+                </p>
+                <h2 className="text-3xl font-black tracking-tight">Top Flows</h2>
+              </div>
+              <Link
+                href="/flows?sort=top"
+                className="text-sm text-foreground/45 hover:text-foreground transition-colors flex items-center gap-1"
+              >
+                View all <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 border border-foreground/8 divide-y md:divide-y-0 md:divide-x divide-foreground/8">
+              {topFlows.map(flow => (
+                <FlowTile key={flow.id} flow={flow} />
+              ))}
+            </div>
+          </div>
         </section>
       )}
+
+      {/* ── Dark CTA ──────────────────────────────────────────────────── */}
+      <section className="relative overflow-hidden bg-[#0d0d0d] px-6 sm:px-10 lg:px-16 py-32">
+        <WebGLBackground variant="dark" />
+        <div className="relative z-10 max-w-3xl mx-auto text-center">
+          <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-white/25 mb-5">
+            Daily digest
+          </p>
+          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] tracking-tight mb-6">
+            Get one great flow,
+            <br />
+            <span className="text-white/25 font-light italic">every single day</span>
+          </h2>
+          <p className="text-white/40 text-base max-w-md mx-auto mb-10 leading-relaxed">
+            A hand-picked GTM automation explained in full detail, delivered to
+            your inbox every morning.
+          </p>
+          <div className="flex items-center justify-center gap-4">
+            <Link
+              href="/flow-of-the-day"
+              className="inline-flex items-center gap-2 bg-[#c5f500] text-black text-sm font-bold px-7 py-3 rounded-full hover:bg-[#d4ff00] transition-colors"
+            >
+              See Today&apos;s Flow <ArrowRight className="h-4 w-4" />
+            </Link>
+            <Link
+              href="/flows"
+              className="text-sm text-white/35 hover:text-white transition-colors flex items-center gap-1"
+            >
+              Browse all flows <ArrowRight className="h-3.5 w-3.5" />
+            </Link>
+          </div>
+        </div>
+      </section>
+
+      {/* ── Recent flows showcase ─────────────────────────────────────── */}
+      {recentFlows && recentFlows.length > 0 && (
+        <section className="border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
+          <div className="max-w-7xl mx-auto">
+            <div className="flex items-end justify-between mb-8">
+              <div>
+                <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-foreground/40 mb-2">
+                  Just added
+                </p>
+                <h2 className="text-3xl font-black tracking-tight">Recent Flows</h2>
+              </div>
+              <Link
+                href="/flows"
+                className="text-sm text-foreground/45 hover:text-foreground transition-colors flex items-center gap-1"
+              >
+                Browse all <ArrowRight className="h-3.5 w-3.5" />
+              </Link>
+            </div>
+            <div className="flex gap-3 overflow-x-auto pb-2 snap-x scrollbar-none">
+              {recentFlows.map(flow => (
+                <Link
+                  key={flow.id}
+                  href={`/flows/${flow.id}`}
+                  className="flex-shrink-0 w-56 snap-start bg-white border border-foreground/8 p-5 hover:border-[#c5f500]/60 hover:shadow-sm transition-all group"
+                >
+                  <span className="inline-block text-[10px] font-semibold tracking-widest uppercase text-foreground/40 border border-foreground/12 px-2 py-0.5 rounded-full mb-3">
+                    {flow.category}
+                  </span>
+                  <h3 className="font-bold text-sm leading-snug group-hover:text-[#7a9e00] transition-colors line-clamp-2 mb-3">
+                    {flow.title}
+                  </h3>
+                  <div className="flex flex-wrap gap-1">
+                    {flow.tools.slice(0, 3).map(tool => (
+                      <span key={tool} className="text-[10px] bg-foreground/5 text-foreground/45 px-2 py-0.5 rounded-full">
+                        {tool}
+                      </span>
+                    ))}
+                    {flow.tools.length > 3 && (
+                      <span className="text-[10px] text-foreground/30">+{flow.tools.length - 3}</span>
+                    )}
+                  </div>
+                </Link>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
     </div>
+  )
+}
+
+/* ── Flow tile used in the top-flows grid ────────────────────────────────── */
+function FlowTile({ flow }: { flow: Flow }) {
+  return (
+    <Link href={`/flows/${flow.id}`} className="block group bg-white p-6 hover:bg-[#fafaf8] transition-colors">
+      <div className="flex items-start justify-between gap-3 mb-3">
+        <span className="text-[10px] font-semibold tracking-widest uppercase text-foreground/40 border border-foreground/12 px-2 py-0.5 rounded-full">
+          {flow.category}
+        </span>
+        <span className="text-[11px] text-foreground/30 flex items-center gap-0.5 shrink-0">
+          <ArrowUp className="h-3 w-3" />{flow.vote_count}
+        </span>
+      </div>
+      <h3 className="font-bold text-base leading-snug group-hover:text-[#7a9e00] transition-colors line-clamp-2 mb-2">
+        {flow.title}
+      </h3>
+      <p className="text-sm text-foreground/45 line-clamp-2 mb-4">{flow.description}</p>
+      <div className="flex flex-wrap gap-1.5">
+        {flow.tools.slice(0, 4).map(tool => (
+          <span key={tool} className="text-[10px] bg-foreground/5 text-foreground/45 px-2 py-0.5 rounded-full">
+            {tool}
+          </span>
+        ))}
+        {flow.tools.length > 4 && (
+          <span className="text-[10px] text-foreground/30">+{flow.tools.length - 4}</span>
+        )}
+      </div>
+      {flow.steps.length > 0 && (
+        <div className="flex items-center gap-1 mt-4 text-[11px] text-foreground/30 overflow-hidden">
+          {flow.steps.slice(0, 3).map((step, i) => (
+            <span key={i} className="flex items-center gap-1">
+              {i > 0 && <span>→</span>}
+              <span className="bg-foreground/5 px-1.5 py-0.5 rounded truncate max-w-[80px]">{step.app}</span>
+            </span>
+          ))}
+          {flow.steps.length > 3 && <span>→ +{flow.steps.length - 3}</span>}
+        </div>
+      )}
+      <div className="flex items-center gap-3 mt-4 pt-4 border-t border-dashed border-foreground/8 text-[11px] text-foreground/30">
+        {flow.fork_count > 0 && (
+          <span className="flex items-center gap-0.5"><GitFork className="h-3 w-3" />{flow.fork_count}</span>
+        )}
+        <span className="flex items-center gap-0.5"><Bookmark className="h-3 w-3" />{flow.save_count}</span>
+        {flow.author_name && <span>by {flow.author_name}</span>}
+      </div>
+    </Link>
   )
 }

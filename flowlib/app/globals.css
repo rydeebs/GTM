@@ -4,32 +4,32 @@
 
 @layer base {
   :root {
-    /* ── Dark theme (default) ── */
-    --background:          222 47% 6%;
-    --foreground:          210 40% 96%;
-    --card:                222 47% 10%;
-    --card-foreground:     210 40% 96%;
+    /* ── Light warm theme ── */
+    --background:           36 20% 95%;       /* warm off-white #f2f0ec */
+    --foreground:           0 0% 7%;          /* near-black #111 */
+    --card:                 0 0% 100%;        /* pure white */
+    --card-foreground:      0 0% 7%;
 
-    /* Blue primary: #3b82f6 → hsl(217 91% 60%) */
-    --primary:             217 91% 60%;
-    --primary-foreground:  0 0% 100%;
+    /* Lime accent: #c5f500 → hsl(74 100% 48%) */
+    --primary:              74 100% 48%;
+    --primary-foreground:   0 0% 5%;          /* dark text on lime */
 
-    --secondary:           217 33% 17%;
-    --secondary-foreground: 210 40% 96%;
+    --secondary:            36 12% 91%;       /* warm light gray */
+    --secondary-foreground: 0 0% 20%;
 
-    --muted:               217 33% 17%;
-    --muted-foreground:    215 20% 58%;
+    --muted:                36 10% 91%;
+    --muted-foreground:     0 0% 44%;
 
-    --accent:              217 33% 20%;
-    --accent-foreground:   210 40% 96%;
+    --accent:               36 10% 91%;
+    --accent-foreground:    0 0% 7%;
 
-    --destructive:         0 84% 60%;
+    --destructive:          0 84% 60%;
     --destructive-foreground: 0 0% 100%;
 
-    --border:              217 33% 21%;
-    --input:               217 33% 17%;
-    --ring:                217 91% 60%;
-    --radius:              0.5rem;
+    --border:               36 12% 85%;       /* subtle warm hairline */
+    --input:                36 12% 87%;
+    --ring:                 74 100% 48%;
+    --radius:               0.375rem;
   }
 }
 
@@ -38,14 +38,15 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-mono), ui-monospace, monospace;
+    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
+    -webkit-font-smoothing: antialiased;
   }
 }
 
 /* ReactFlow overrides */
 .react-flow__node-default {
-  border-radius: 8px;
+  border-radius: 6px;
   border: 1px solid hsl(var(--border));
   background: hsl(var(--card));
   font-size: 13px;
