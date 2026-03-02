@@ -1,8 +1,6 @@
 import { Resend } from 'resend'
 import type { Flow } from './types'
 
-const resend = new Resend(process.env.RESEND_API_KEY)
-
 const FROM = 'FlowLib <digest@yourflowlib.com>'  // update to your verified domain
 
 export async function sendDigestEmail(
@@ -60,7 +58,7 @@ export async function sendDigestEmail(
 </body>
 </html>`
 
-    const { error } = await resend.emails.send({
+    const { error } = await new Resend(process.env.RESEND_API_KEY).emails.send({
       from:    FROM,
       to,
       subject: `Flow of the Day: ${flow.title}`,
