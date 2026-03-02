@@ -45,7 +45,7 @@ export function FlowCard({ flow, userVoted, userSaved, onVote, onSave }: FlowCar
 
   return (
     <Link href={`/flows/${flow.id}`} className="block group">
-      <div className="bg-white border border-foreground/8 p-6 hover:border-[#c5f500]/50 hover:shadow-sm transition-all">
+      <div className="bg-white border border-foreground/8 p-6 hover:border-[#3b82f6]/30 hover:shadow-sm transition-all">
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <span className="text-[10px] font-semibold tracking-widest uppercase text-foreground/40 border border-foreground/12 px-2 py-0.5 rounded-full">
@@ -56,7 +56,7 @@ export function FlowCard({ flow, userVoted, userSaved, onVote, onSave }: FlowCar
           </span>
         </div>
 
-        <h3 className="font-bold text-base leading-snug group-hover:text-[#7a9e00] transition-colors line-clamp-2 mb-2">
+        <h3 className="font-bold text-base leading-snug group-hover:text-[#3b82f6] transition-colors line-clamp-2 mb-2">
           {flow.title}
         </h3>
 
@@ -108,14 +108,14 @@ export function FlowCard({ flow, userVoted, userSaved, onVote, onSave }: FlowCar
             )}
             <button
               onClick={handleSave}
-              className={`p-1.5 hover:text-foreground/60 transition-colors ${userSaved ? 'text-[#c5f500]' : ''}`}
+              className={`p-1.5 hover:text-foreground/60 transition-colors ${userSaved ? 'text-[#3b82f6]' : ''}`}
               title="Save"
             >
               <Bookmark className="h-3.5 w-3.5" />
             </button>
             <button
               onClick={handleVote}
-              className={`flex items-center gap-1 px-1.5 py-1 hover:text-foreground/60 transition-colors ${userVoted ? 'text-[#c5f500] font-semibold' : ''}`}
+              className={`flex items-center gap-1 px-1.5 py-1 hover:text-foreground/60 transition-colors ${userVoted ? 'text-[#3b82f6] font-semibold' : ''}`}
               title="Upvote"
             >
               <ArrowUp className="h-3.5 w-3.5" />

@@ -54,7 +54,7 @@ export default async function HomePage() {
           <div className="flex items-center justify-center gap-3 mb-12">
             <Link
               href="/flows"
-              className="inline-flex items-center gap-2 bg-[#c5f500] text-black text-sm font-bold px-7 py-3 rounded-full hover:bg-[#d4ff00] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#3b82f6] text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-[#60a5fa] active:bg-[#1d4ed8] transition-colors"
             >
               Browse Flows <ArrowRight className="h-4 w-4" />
             </Link>
@@ -144,7 +144,7 @@ export default async function HomePage() {
           <div className="flex items-center justify-center gap-4">
             <Link
               href="/flow-of-the-day"
-              className="inline-flex items-center gap-2 bg-[#c5f500] text-black text-sm font-bold px-7 py-3 rounded-full hover:bg-[#d4ff00] transition-colors"
+              className="inline-flex items-center gap-2 bg-[#3b82f6] text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-[#60a5fa] active:bg-[#1d4ed8] transition-colors"
             >
               See Today&apos;s Flow <ArrowRight className="h-4 w-4" />
             </Link>
@@ -181,12 +181,12 @@ export default async function HomePage() {
                 <Link
                   key={flow.id}
                   href={`/flows/${flow.id}`}
-                  className="flex-shrink-0 w-56 snap-start bg-white border border-foreground/8 p-5 hover:border-[#c5f500]/60 hover:shadow-sm transition-all group"
+                  className="flex-shrink-0 w-56 snap-start bg-white border border-foreground/8 p-5 hover:border-[#3b82f6]/40 hover:shadow-sm transition-all group"
                 >
                   <span className="inline-block text-[10px] font-semibold tracking-widest uppercase text-foreground/40 border border-foreground/12 px-2 py-0.5 rounded-full mb-3">
                     {flow.category}
                   </span>
-                  <h3 className="font-bold text-sm leading-snug group-hover:text-[#7a9e00] transition-colors line-clamp-2 mb-3">
+                  <h3 className="font-bold text-sm leading-snug group-hover:text-[#3b82f6] transition-colors line-clamp-2 mb-3">
                     {flow.title}
                   </h3>
                   <div className="flex flex-wrap gap-1">
@@ -222,7 +222,7 @@ function FlowTile({ flow }: { flow: Flow }) {
           <ArrowUp className="h-3 w-3" />{flow.vote_count}
         </span>
       </div>
-      <h3 className="font-bold text-base leading-snug group-hover:text-[#7a9e00] transition-colors line-clamp-2 mb-2">
+      <h3 className="font-bold text-base leading-snug group-hover:text-[#3b82f6] transition-colors line-clamp-2 mb-2">
         {flow.title}
       </h3>
       <p className="text-sm text-foreground/45 line-clamp-2 mb-4">{flow.description}</p>

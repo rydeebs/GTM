@@ -10,9 +10,9 @@
     --card:                 0 0% 100%;        /* pure white */
     --card-foreground:      0 0% 7%;
 
-    /* Lime accent: #c5f500 → hsl(74 100% 48%) */
-    --primary:              74 100% 48%;
-    --primary-foreground:   0 0% 5%;          /* dark text on lime */
+    /* Blue primary: #3b82f6 → hsl(217 91% 60%) */
+    --primary:              217 91% 60%;
+    --primary-foreground:   0 0% 100%;        /* white text on blue */
 
     --secondary:            36 12% 91%;       /* warm light gray */
     --secondary-foreground: 0 0% 20%;
@@ -28,7 +28,7 @@
 
     --border:               36 12% 85%;       /* subtle warm hairline */
     --input:                36 12% 87%;
-    --ring:                 74 100% 48%;
+    --ring:                 217 91% 60%;
     --radius:               0.375rem;
   }
 }

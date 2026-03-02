@@ -28,7 +28,7 @@ export function Navbar() {
       <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
         <nav className="flex items-center gap-6 bg-[#0d0d0d] text-white rounded-full px-6 py-2.5 shadow-2xl shadow-black/20">
           <Link href="/" className="flex items-center gap-1.5 font-semibold text-sm">
-            <Zap className="h-4 w-4 text-[#c5f500]" />
+            <Zap className="h-4 w-4 text-[#60a5fa]" />
             RunGTM
           </Link>
           <div className="hidden sm:flex items-center gap-5">
@@ -36,7 +36,7 @@ export function Navbar() {
           </div>
           <Link
             href="/submit"
-            className="ml-2 text-xs font-semibold bg-[#c5f500] text-black px-4 py-1.5 rounded-full hover:bg-[#d4ff00] transition-colors"
+            className="ml-2 text-xs font-semibold bg-[#3b82f6] text-white px-4 py-1.5 rounded-full hover:bg-[#60a5fa] transition-colors"
           >
             Submit a Flow
           </Link>
