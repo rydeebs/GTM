@@ -47,7 +47,7 @@ export default async function HomePage() {
           { label: 'Tools covered', value: '40+' },
           { label: 'Subscribers', value: '2k+' },
         ].map(stat => (
-          <div key={stat.label} className="p-6 rounded-xl border border-border bg-white">
+          <div key={stat.label} className="p-6 rounded-xl border border-border bg-card">
             <div className="text-3xl font-bold text-primary">{stat.value}</div>
             <div className="text-sm text-muted-foreground mt-1">{stat.label}</div>
           </div>
