@@ -136,7 +136,7 @@ export default async function FlowDetailPage({ params }: Props) {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">Steps</h2>
         <div className="space-y-3">
           {flow.steps.map((step, i) => (
-            <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-white">
+            <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card">
               <div className="flex-shrink-0 w-8 h-8 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm font-bold">
                 {i + 1}
               </div>

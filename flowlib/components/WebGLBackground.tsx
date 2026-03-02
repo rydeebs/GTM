@@ -8,8 +8,8 @@ attribute vec4 position;
 void main() { gl_Position = position; }
 `
 
-// ── Hero: animated diagonal light beams on warm off-white ────────────────────
-// Fast-moving angled streaks — clearly visible motion
+// ── Hero: dark animated background with subtle blue-indigo diagonal shimmer ───
+// Deep charcoal base with barely-there animated blue waves — premium dark feel
 const HERO_FRAG = `
 precision highp float;
 uniform vec2  resolution;
@@ -20,21 +20,21 @@ void main() {
 
   float t = time * 0.5;
 
-  /* two overlapping diagonal wave sets at different frequencies/speeds */
+  /* two overlapping diagonal wave sets */
   float d = uv.x * 0.707 + uv.y * 0.707;
   float a = sin(d * 22.0 + t)         * 0.5 + 0.5;
   float b = sin(d * 44.0 - t * 1.3)   * 0.5 + 0.5;
   float c = sin(d * 11.0 + t * 0.4)   * 0.5 + 0.5;
-
   float n = a * 0.5 + b * 0.3 + c * 0.2;
 
-  /* warm off-white — range is narrow but visually obvious at full screen */
-  float bright = mix(0.930, 0.975, n);
-  gl_FragColor = vec4(bright, bright * 0.992, bright * 0.977, 1.0);
+  /* dark charcoal → subtle blue-indigo shimmer */
+  vec3 base   = vec3(0.063, 0.063, 0.078);  /* #101013 */
+  vec3 accent = vec3(0.082, 0.098, 0.196);  /* #15193200 blue */
+  gl_FragColor = vec4(mix(base, accent, n * 0.7), 1.0);
 }
 `
 
-// ── Dark CTA: domain-warped fractal noise with blue glow ─────────────────────
+// ── Dark CTA: domain-warped fractal noise with blue/purple glow ──────────────
 // Uses fBm domain-warping (Inigo Quilez technique) for organic flowing motion
 const DARK_FRAG = `
 precision highp float;

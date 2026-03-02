@@ -181,7 +181,7 @@ export default async function HomePage() {
                 <Link
                   key={flow.id}
                   href={`/flows/${flow.id}`}
-                  className="flex-shrink-0 w-56 snap-start bg-white border border-foreground/8 p-5 hover:border-[#3b82f6]/40 hover:shadow-sm transition-all group"
+                  className="flex-shrink-0 w-56 snap-start bg-card border border-white/8 p-5 hover:border-[#3b82f6]/40 hover:shadow-sm transition-all group"
                 >
                   <span className="inline-block text-[10px] font-semibold tracking-widest uppercase text-foreground/40 border border-foreground/12 px-2 py-0.5 rounded-full mb-3">
                     {flow.category}
@@ -213,7 +213,7 @@ export default async function HomePage() {
 /* ── Flow tile used in the top-flows grid ────────────────────────────────── */
 function FlowTile({ flow }: { flow: Flow }) {
   return (
-    <Link href={`/flows/${flow.id}`} className="block group bg-white p-6 hover:bg-[#fafaf8] transition-colors">
+    <Link href={`/flows/${flow.id}`} className="block group bg-card p-6 hover:bg-white/5 transition-colors">
       <div className="flex items-start justify-between gap-3 mb-3">
         <span className="text-[10px] font-semibold tracking-widest uppercase text-foreground/40 border border-foreground/12 px-2 py-0.5 rounded-full">
           {flow.category}

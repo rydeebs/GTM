@@ -66,7 +66,7 @@ export default async function FlowOfTheDayPage() {
     <div className="max-w-3xl mx-auto">
       {/* Date badge */}
       <div className="flex items-center gap-2 mb-6">
-        <Badge className="bg-amber-100 text-amber-800 border-amber-200 hover:bg-amber-100">
+        <Badge className="bg-amber-900/40 text-amber-400 border-amber-700/60 hover:bg-amber-900/40">
           ⭐ Flow of the Day — {dateStr}
         </Badge>
       </div>
@@ -113,9 +113,9 @@ export default async function FlowOfTheDayPage() {
 
       {/* Why clever */}
       {flow.why_clever && (
-        <section className="mb-8 bg-amber-50 border border-amber-200 rounded-xl p-5">
-          <h2 className="font-semibold text-sm mb-2 text-amber-800">💡 Why it's clever</h2>
-          <p className="text-sm leading-relaxed text-amber-900">{flow.why_clever}</p>
+        <section className="mb-8 bg-amber-950/30 border border-amber-800/40 rounded-xl p-5">
+          <h2 className="font-semibold text-sm mb-2 text-amber-400">💡 Why it's clever</h2>
+          <p className="text-sm leading-relaxed text-amber-200/75">{flow.why_clever}</p>
         </section>
       )}
 
@@ -132,7 +132,7 @@ export default async function FlowOfTheDayPage() {
         <h2 className="text-sm font-semibold uppercase tracking-wide text-muted-foreground mb-4">How it works — step by step</h2>
         <div className="space-y-3">
           {flow.steps.map((step, i) => (
-            <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-white">
+            <div key={i} className="flex items-start gap-4 p-4 rounded-xl border border-border bg-card">
               <div className="flex-shrink-0 w-8 h-8 rounded-full bg-amber-500 text-white flex items-center justify-center text-sm font-bold">
                 {i + 1}
               </div>
@@ -157,9 +157,9 @@ export default async function FlowOfTheDayPage() {
       </div>
 
       {/* Subscribe */}
-      <div className="rounded-2xl bg-slate-900 text-white p-8 text-center">
+      <div className="rounded-2xl bg-card border border-white/8 p-8 text-center">
         <h2 className="text-2xl font-bold mb-2">Get this in your inbox</h2>
-        <p className="text-slate-400 mb-6 text-sm">One great automation flow every morning. No spam, ever.</p>
+        <p className="text-foreground/45 mb-6 text-sm">One great automation flow every morning. No spam, ever.</p>
         <SubscribeForm />
       </div>
     </div>

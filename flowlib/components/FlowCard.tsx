@@ -45,7 +45,7 @@ export function FlowCard({ flow, userVoted, userSaved, onVote, onSave }: FlowCar
 
   return (
     <Link href={`/flows/${flow.id}`} className="block group">
-      <div className="bg-white border border-foreground/8 p-6 hover:border-[#3b82f6]/30 hover:shadow-sm transition-all">
+      <div className="bg-card border border-white/8 p-6 hover:border-[#3b82f6]/40 hover:shadow-[0_0_0_1px_#3b82f620] transition-all">
         {/* Header */}
         <div className="flex items-start justify-between gap-3 mb-3">
           <span className="text-[10px] font-semibold tracking-widest uppercase text-foreground/40 border border-foreground/12 px-2 py-0.5 rounded-full">

@@ -26,7 +26,7 @@ export function Navbar() {
   if (scrolled) {
     return (
       <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
-        <nav className="flex items-center gap-6 bg-[#0d0d0d] text-white rounded-full px-6 py-2.5 shadow-2xl shadow-black/20">
+        <nav className="flex items-center gap-6 bg-[#1c1c1c] text-white rounded-full px-6 py-2.5 ring-1 ring-white/10 shadow-2xl shadow-black/40">
           <Link href="/" className="flex items-center gap-1.5 font-semibold text-sm">
             <Zap className="h-4 w-4 text-[#60a5fa]" />
             RunGTM

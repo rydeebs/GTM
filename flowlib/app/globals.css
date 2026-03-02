@@ -4,30 +4,34 @@
 
 @layer base {
   :root {
-    /* ── Light warm theme ── */
-    --background:           36 20% 95%;       /* warm off-white #f2f0ec */
-    --foreground:           0 0% 7%;          /* near-black #111 */
-    --card:                 0 0% 100%;        /* pure white */
-    --card-foreground:      0 0% 7%;
+    /* ── Dark theme ── */
+    --background:           0 0% 7%;          /* #121212 near-black */
+    --foreground:           210 17% 90%;      /* #e2e8f0 cool off-white */
+
+    --card:                 0 0% 10%;         /* #1a1a1a elevated surface */
+    --card-foreground:      210 17% 90%;
+
+    --popover:              0 0% 12%;         /* #1e1e1e dropdown surface */
+    --popover-foreground:   210 17% 90%;
 
     /* Blue primary: #3b82f6 → hsl(217 91% 60%) */
     --primary:              217 91% 60%;
-    --primary-foreground:   0 0% 100%;        /* white text on blue */
+    --primary-foreground:   0 0% 100%;
 
-    --secondary:            36 12% 91%;       /* warm light gray */
-    --secondary-foreground: 0 0% 20%;
+    --secondary:            0 0% 15%;         /* #262626 subtle elevated */
+    --secondary-foreground: 0 0% 75%;
 
-    --muted:                36 10% 91%;
-    --muted-foreground:     0 0% 44%;
+    --muted:                0 0% 15%;
+    --muted-foreground:     0 0% 48%;
 
-    --accent:               36 10% 91%;
-    --accent-foreground:    0 0% 7%;
+    --accent:               0 0% 15%;
+    --accent-foreground:    0 0% 90%;
 
-    --destructive:          0 84% 60%;
+    --destructive:          0 72% 51%;
     --destructive-foreground: 0 0% 100%;
 
-    --border:               36 12% 85%;       /* subtle warm hairline */
-    --input:                36 12% 87%;
+    --border:               0 0% 18%;         /* #2e2e2e subtle divider */
+    --input:                0 0% 15%;
     --ring:                 217 91% 60%;
     --radius:               0.375rem;
   }

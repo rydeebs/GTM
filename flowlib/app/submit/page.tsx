@@ -141,7 +141,7 @@ export default function SubmitPage() {
         <div className="space-y-3">
           <Label>Steps * <span className="text-muted-foreground text-xs">(add each step in order)</span></Label>
           {steps.map((step, i) => (
-            <div key={i} className="border border-border rounded-xl p-4 space-y-3 bg-gray-50">
+            <div key={i} className="border border-border rounded-xl p-4 space-y-3 bg-card">
               <div className="flex items-center justify-between">
                 <span className="text-sm font-semibold text-muted-foreground">Step {i + 1}</span>
                 {steps.length > 1 && (
