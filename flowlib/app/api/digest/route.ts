@@ -56,7 +56,7 @@ export async function POST(req: NextRequest) {
 
   for (let i = 0; i < subscribers.length; i += BATCH) {
     const batch = subscribers.slice(i, i + BATCH)
-    await Promise.all(batch.map(async sub => {
+    await Promise.all(batch.map(async (sub: { email: string }) => {
       const ok = await sendDigestEmail(sub.email, flow, blurb)
       if (ok) sent++
     }))
