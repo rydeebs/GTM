@@ -9,7 +9,7 @@ export function Navbar() {
         <div className="flex items-center gap-8">
           <Link href="/" className="flex items-center gap-2 font-bold text-lg text-primary">
             <Zap className="h-5 w-5" />
-            FlowLib
+            RunGTM
           </Link>
           <div className="hidden sm:flex items-center gap-1">
             <Link href="/flows" className="px-3 py-1.5 text-sm rounded-md hover:bg-accent text-muted-foreground hover:text-foreground transition-colors">

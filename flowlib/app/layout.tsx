@@ -10,7 +10,7 @@ const jetbrainsMono = JetBrains_Mono({
 })
 
 export const metadata: Metadata = {
-  title:       'FlowLib — GTM Automation Flows',
+  title:       'RunGTM — GTM Automation Flows',
   description: 'Discover, share, and fork the best GTM automation flows built with Zapier, Clay, Make, and more.',
 }
 

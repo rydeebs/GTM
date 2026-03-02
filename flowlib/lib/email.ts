@@ -1,7 +1,7 @@
 import { Resend } from 'resend'
 import type { Flow } from './types'
 
-const FROM = 'FlowLib <digest@yourflowlib.com>'  // update to your verified domain
+const FROM = 'RunGTM <digest@rungtm.com>'  // update to your verified domain
 
 export async function sendDigestEmail(
   to:    string,
@@ -52,7 +52,7 @@ export async function sendDigestEmail(
     </a>
   </div>
   <div class="footer">
-    <p>You're receiving this because you subscribed to FlowLib's daily digest.</p>
+    <p>You're receiving this because you subscribed to RunGTM's daily digest.</p>
     <p><a href="${process.env.NEXT_PUBLIC_APP_URL}/unsubscribe?email={{email}}">Unsubscribe</a></p>
   </div>
 </body>

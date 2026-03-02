@@ -70,7 +70,7 @@ export async function fetchRedditPosts(subreddit: string): Promise<RawPost[]> {
   try {
     const res = await fetch(
       `https://www.reddit.com/r/${sub}/new.json?limit=25`,
-      { headers: { 'User-Agent': 'flowlib-bot/1.0' } }
+      { headers: { 'User-Agent': 'rungtm-bot/1.0' } }
     )
     if (!res.ok) return []
     const data = await res.json()

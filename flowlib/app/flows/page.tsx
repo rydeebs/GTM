@@ -58,7 +58,7 @@ export default async function FlowsPage({ searchParams }: Props) {
     <div>
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h1 className="text-3xl font-bold">Flow Library</h1>
+          <h1 className="text-3xl font-bold">RunGTM</h1>
           <p className="text-muted-foreground mt-1">
             {count ?? 0} flows across Zapier, Clay, Make, and more
           </p>

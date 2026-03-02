@@ -28,7 +28,7 @@ export default async function HomePage() {
       <section className="text-center py-20 px-4">
         <div className="inline-flex items-center gap-2 bg-primary/10 text-primary text-sm px-4 py-1.5 rounded-full mb-6 font-medium">
           <Zap className="h-4 w-4" />
-          The GTM Automation Flow Library
+          RunGTM
         </div>
         <h1 className="text-5xl font-bold tracking-tight mb-5 max-w-3xl mx-auto leading-tight">
           Discover & share the best <span className="text-primary">GTM automation flows</span>
