@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GTMhub Flow Importer</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <!-- Header -->
+  <div class="header">
+    <span class="logo">GTMhub</span>
+    <button id="settings-btn" class="icon-btn" title="Settings">⚙</button>
+  </div>
+
+  <!-- Settings panel (hidden by default) -->
+  <div id="settings-panel" class="panel hidden">
+    <h3>Settings</h3>
+    <label for="api-key">GTMhub API Key</label>
+    <input id="api-key" type="password" placeholder="gtmhub_live_..." />
+    <label for="api-url">GTMhub API URL</label>
+    <input id="api-url" type="text" placeholder="https://api.gtmhub.io" />
+    <button id="save-settings" class="btn btn-primary">Save</button>
+    <p id="settings-status" class="status-msg hidden"></p>
+  </div>
+
+  <!-- Main panel -->
+  <div id="main-panel" class="panel">
+
+    <!-- Unsupported site state -->
+    <div id="state-unsupported" class="state hidden">
+      <div class="icon">🔌</div>
+      <p>Open a <strong>Zapier</strong> or <strong>Clay</strong> flow to import it into GTMhub.</p>
+      <div class="supported-sites">
+        <span class="site-badge">zapier.com/editor/*</span>
+        <span class="site-badge">app.clay.com/*</span>
+      </div>
+    </div>
+
+    <!-- Ready to scan state -->
+    <div id="state-ready" class="state hidden">
+      <div class="platform-badge" id="platform-label"></div>
+      <p class="hint">Click below to read the flow from this page.</p>
+      <button id="scan-btn" class="btn btn-primary">Read Flow</button>
+    </div>
+
+    <!-- Loading state -->
+    <div id="state-loading" class="state hidden">
+      <div class="spinner"></div>
+      <p>Reading flow...</p>
+    </div>
+
+    <!-- Preview state -->
+    <div id="state-preview" class="state hidden">
+      <div class="flow-meta">
+        <span class="platform-badge" id="preview-platform"></span>
+        <strong id="preview-name" class="flow-name"></strong>
+      </div>
+      <div id="steps-list" class="steps-list"></div>
+      <div class="actions">
+        <button id="import-btn" class="btn btn-primary">Import to GTMhub</button>
+        <button id="rescan-btn" class="btn btn-ghost">Re-scan</button>
+      </div>
+    </div>
+
+    <!-- Sending state -->
+    <div id="state-sending" class="state hidden">
+      <div class="spinner"></div>
+      <p>Importing flow...</p>
+    </div>
+
+    <!-- Success state -->
+    <div id="state-success" class="state hidden">
+      <div class="icon success-icon">✓</div>
+      <p><strong>Flow imported!</strong></p>
+      <a id="view-link" href="#" target="_blank" class="btn btn-primary">View in GTMhub</a>
+      <button id="import-another-btn" class="btn btn-ghost">Import Another</button>
+    </div>
+
+    <!-- Error state -->
+    <div id="state-error" class="state hidden">
+      <div class="icon error-icon">✕</div>
+      <p id="error-message" class="error-text"></p>
+      <button id="retry-btn" class="btn btn-ghost">Try Again</button>
+    </div>
+
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
