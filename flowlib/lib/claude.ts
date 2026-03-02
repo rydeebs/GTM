@@ -64,7 +64,7 @@ export async function generateFlowOfDayBlurb(flow: {
   estimated_minutes?: number | null
   why_clever?:        string | null
 }): Promise<string> {
-  const message = await client.messages.create({
+  const message = await getClient().messages.create({
     model:      'claude-haiku-4-5-20251001',
     max_tokens: 512,
     messages: [
