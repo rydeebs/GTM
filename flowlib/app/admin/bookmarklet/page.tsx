@@ -173,7 +173,7 @@ export default function BookmarkletPage() {
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <p className="text-sm font-medium">Response</p>
-              {'ok' in (testResult as Record<string, unknown>) && (testResult as Record<string, unknown>).ok && (
+              {'ok' in (testResult as Record<string, unknown>) && !!(testResult as Record<string, unknown>).ok && (
                 <Badge className="bg-green-500/15 text-green-700 dark:text-green-400 border-green-400/30 text-xs">Success</Badge>
               )}
               {'error' in (testResult as Record<string, unknown>) && (
