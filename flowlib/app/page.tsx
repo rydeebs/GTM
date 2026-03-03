@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import { ArrowRight, ArrowUp, Bookmark, GitFork } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
+import { HeroSection } from '@/components/HeroSection'
 import { WebGLBackground } from '@/components/WebGLBackground'
 import type { Flow } from '@/lib/types'
 
@@ -25,63 +26,7 @@ export default async function HomePage() {
     <div className="-mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
 
       {/* ── Hero ──────────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden min-h-[88vh] flex flex-col items-center justify-center px-6 pt-28 pb-20">
-        <WebGLBackground variant="hero" />
-
-        <div className="relative z-10 text-center max-w-5xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center border border-foreground/20 rounded-full px-4 py-1 mb-8">
-            <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-foreground/50">
-              For GTM Teams
-            </span>
-          </div>
-
-          {/* Headline — aurora WebGL glow floats behind the text */}
-          <div className="relative mb-8 py-4">
-            <WebGLBackground variant="title" className="rounded-2xl" />
-            <h1 className="relative z-10 text-6xl sm:text-7xl lg:text-[5.5rem] font-black leading-[0.95] tracking-tight">
-              <span className="block">Discover &amp; run</span>
-              <span className="block text-foreground/25 font-light italic">
-                the best GTM
-              </span>
-              <span className="block">automation flows</span>
-            </h1>
-          </div>
-
-          <p className="text-lg text-foreground/50 max-w-xl mx-auto mb-10 leading-relaxed">
-            Browse, fork, and deploy automation flows built with Zapier, Clay,
-            Make, Apollo, and more — curated by the GTM community.
-          </p>
-
-          {/* CTAs */}
-          <div className="flex items-center justify-center gap-3 mb-12">
-            <Link
-              href="/flows"
-              className="inline-flex items-center gap-2 bg-[#3b82f6] text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-[#60a5fa] active:bg-[#1d4ed8] transition-colors"
-            >
-              Browse Flows <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/submit"
-              className="inline-flex items-center gap-2 border border-foreground/20 text-sm font-medium px-7 py-3 rounded-full hover:bg-foreground/5 transition-colors"
-            >
-              Submit a Flow
-            </Link>
-          </div>
-
-          {/* Tool tags */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {['Zapier', 'Clay', 'Make', 'Apollo', 'n8n', 'HeyReach', 'Instantly', 'Smartlead'].map(tool => (
-              <span
-                key={tool}
-                className="text-xs border border-foreground/12 text-foreground/40 px-3 py-1 rounded-full"
-              >
-                {tool}
-              </span>
-            ))}
-          </div>
-        </div>
-      </section>
+      <HeroSection />
 
       {/* ── Stats ─────────────────────────────────────────────────────── */}
       <section className="border-t border-dashed border-foreground/10">
