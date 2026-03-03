@@ -1,11 +1,11 @@
 'use client'
 
-import { useEffect, useState } from 'react'
+import { Suspense, useEffect, useState } from 'react'
 import { useSearchParams } from 'next/navigation'
 import { CheckCircle2, XCircle, Loader2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 
-export default function UnsubscribePage() {
+function UnsubscribeContent() {
   const searchParams = useSearchParams()
   const email        = searchParams.get('email') ?? ''
 
@@ -78,5 +78,13 @@ export default function UnsubscribePage() {
         Try Again
       </Button>
     </div>
+  )
+}
+
+export default function UnsubscribePage() {
+  return (
+    <Suspense>
+      <UnsubscribeContent />
+    </Suspense>
   )
 }
