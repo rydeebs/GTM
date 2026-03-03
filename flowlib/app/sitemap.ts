@@ -12,7 +12,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     .order('created_at', { ascending: false })
     .limit(1000)
 
-  const flowUrls: MetadataRoute.Sitemap = (flows ?? []).map(flow => ({
+  const flowUrls: MetadataRoute.Sitemap = (flows ?? []).map((flow: { id: string; updated_at: string; category: string }) => ({
     url:             `${baseUrl}/flows/${flow.id}`,
     lastModified:    new Date(flow.updated_at),
     changeFrequency: 'weekly',

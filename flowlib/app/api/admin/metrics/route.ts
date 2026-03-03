@@ -83,7 +83,7 @@ export async function GET(req: NextRequest) {
   }, {} as Record<string, number>)
   const byPlatform = Object.entries(platformMap)
     .map(([platform, count]) => ({ platform, count }))
-    .sort((a, b) => b.count - a.count)
+    .sort((a, b) => (b.count as number) - (a.count as number))
 
   // Weekly buckets (ISO week starting Monday)
   const weekBuckets: Record<string, number> = {}
@@ -120,11 +120,11 @@ export async function GET(req: NextRequest) {
 
   // ── Process subscriber stats ──
   const subs      = subscriberCounts.data ?? []
-  const activeSubs = subs.filter(s => s.active).length
+  const activeSubs = subs.filter((s: { active: boolean }) => s.active).length
 
   // ── Process sources stats ──
   const sources      = sourcesCounts.data ?? []
-  const activeSources = sources.filter(s => s.active).length
+  const activeSources = sources.filter((s: { active: boolean }) => s.active).length
 
   return NextResponse.json({
     data: {
