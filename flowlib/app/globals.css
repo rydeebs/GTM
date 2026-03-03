@@ -46,6 +46,12 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
   }
+  h1, h2 {
+    font-family: var(--font-coda), system-ui, sans-serif;
+  }
+  h3, h4, h5, h6 {
+    font-family: var(--font-code), monospace;
+  }
 }
 
 /* ReactFlow overrides */
