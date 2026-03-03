@@ -6,6 +6,9 @@ import { generateFlowOfDayBlurb } from '@/lib/claude'
 import { sendDigestEmail } from '@/lib/email'
 import type { Flow } from '@/lib/types'
 
+// Vercel Cron sends GET; delegate to POST handler which validates auth
+export async function GET(req: NextRequest) { return POST(req) }
+
 /**
  * POST /api/digest
  * Called by Vercel Cron daily — sends the Flow of the Day email to all active subscribers.

@@ -10,6 +10,9 @@ import type { ScrapeSource, Platform } from '@/lib/types'
 
 const AUTO_PUBLISH_THRESHOLD = 0.85
 
+// Vercel Cron sends GET; delegate to POST handler which validates auth
+export async function GET(req: NextRequest) { return POST(req) }
+
 /**
  * POST /api/scrape
  * Called by Vercel Cron or admin trigger — scrapes all active sources,

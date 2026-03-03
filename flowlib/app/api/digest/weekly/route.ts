@@ -5,6 +5,9 @@ import { createServiceClient } from '@/lib/supabase/server'
 import { sendWeeklyDigestEmail } from '@/lib/email'
 import type { Flow } from '@/lib/types'
 
+// Vercel Cron sends GET; delegate to POST handler which validates auth
+export async function GET(req: NextRequest) { return POST(req) }
+
 /**
  * POST /api/digest/weekly
  * Sends "Top flows this week" email to all active subscribers.
