@@ -72,15 +72,15 @@ export async function GET(req: NextRequest) {
 
   // ── Process ideas stats ──
   const ideas = ideasAll.data ?? []
-  const ideaStatusCounts = ideas.reduce<Record<string, number>>((acc, { status }) => {
+  const ideaStatusCounts = ideas.reduce((acc: Record<string, number>, { status }) => {
     acc[status] = (acc[status] ?? 0) + 1
     return acc
-  }, {})
+  }, {} as Record<string, number>)
 
-  const platformMap = (ideasByPlatform.data ?? []).reduce<Record<string, number>>((acc, { platform }) => {
+  const platformMap = (ideasByPlatform.data ?? []).reduce((acc: Record<string, number>, { platform }) => {
     acc[platform] = (acc[platform] ?? 0) + 1
     return acc
-  }, {})
+  }, {} as Record<string, number>)
   const byPlatform = Object.entries(platformMap)
     .map(([platform, count]) => ({ platform, count }))
     .sort((a, b) => b.count - a.count)
