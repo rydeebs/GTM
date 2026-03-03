@@ -50,21 +50,24 @@ export interface Flow {
 }
 
 export interface FlowIdea {
-  id:                string
-  source_id:         string | null
-  platform:          string
-  source_url:        string
-  raw_content:       string
-  extracted_title:   string | null
-  extracted_desc:    string | null
-  extracted_tools:   string[]
-  extracted_steps:   FlowStep[]
-  confidence:        number
-  status:            IdeaStatus
-  published_flow_id: string | null
-  reviewed_by:       string | null
-  reviewed_at:       string | null
-  created_at:        string
+  id:                      string
+  source_id:               string | null
+  platform:                string
+  source_url:              string
+  raw_content:             string
+  extracted_title:         string | null
+  extracted_desc:          string | null
+  extracted_tools:         string[]
+  extracted_steps:         FlowStep[]
+  extracted_category:      string | null
+  extracted_why_clever:    string | null
+  extracted_estimated_min: number | null
+  confidence:              number
+  status:                  IdeaStatus
+  published_flow_id:       string | null
+  reviewed_by:             string | null
+  reviewed_at:             string | null
+  created_at:              string
 }
 
 export interface ScrapeSource {

@@ -1,12 +1,19 @@
 import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { stepsTodiagram } from '@/lib/utils'
+import { checkDuplicate } from '@/lib/dedup'
 
 export const dynamic = 'force-dynamic'
 
-// POST /api/ideas/[id]/publish
-// Body: optional overrides — { title?, description?, category?, tools?, why_clever?, estimated_minutes? }
-// Creates a published flow from the idea, marks the idea as approved.
+/**
+ * POST /api/ideas/[id]/publish
+ * Publish a flow idea as a live flow, with optional field overrides.
+ * Accepts any status (pending OR approved) so admins can recover from failed auto-publish.
+ * Pass ?force=true to skip duplicate detection.
+ *
+ * Body (all optional — falls back to extracted values):
+ *   { title?, description?, category?, tools?, steps?, why_clever?, estimated_minutes? }
+ */
 export async function POST(
   req:     NextRequest,
   { params }: { params: { id: string } }
@@ -16,11 +23,11 @@ export async function POST(
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 
-  const supabase = createServiceClient()
-  const id       = params.id
+  const supabase  = createServiceClient()
+  const id        = params.id
+  const force     = req.nextUrl.searchParams.get('force') === 'true'
   const overrides = await req.json().catch(() => ({}))
 
-  // Fetch the idea
   const { data: idea, error: fetchErr } = await supabase
     .from('flow_ideas')
     .select('*')
@@ -31,25 +38,45 @@ export async function POST(
     return NextResponse.json({ error: 'Idea not found' }, { status: 404 })
   }
 
-  if (idea.status !== 'pending') {
-    return NextResponse.json({ error: `Idea is already ${idea.status}` }, { status: 409 })
+  // Block only if already published (has a flow linked) — not just by status,
+  // since auto-approved ideas should still be publishable if flow creation failed.
+  if (idea.published_flow_id && !force) {
+    return NextResponse.json(
+      { error: 'This idea already has a published flow', flow_id: idea.published_flow_id },
+      { status: 409 }
+    )
   }
 
-  const title       = overrides.title       ?? idea.extracted_title
-  const description = overrides.description ?? idea.extracted_desc
-  const category    = overrides.category    ?? 'Other'
-  const tools       = overrides.tools       ?? idea.extracted_tools ?? []
-  const steps       = overrides.steps       ?? idea.extracted_steps ?? []
-  const why_clever  = overrides.why_clever  ?? null
-  const estimated_minutes = overrides.estimated_minutes ?? null
+  const title       = overrides.title             ?? idea.extracted_title         ?? 'Untitled Flow'
+  const description = overrides.description       ?? idea.extracted_desc          ?? ''
+  const category    = overrides.category          ?? idea.extracted_category      ?? 'Other'
+  const tools       = overrides.tools             ?? idea.extracted_tools         ?? []
+  const steps       = overrides.steps             ?? idea.extracted_steps         ?? []
+  const why_clever  = overrides.why_clever        ?? idea.extracted_why_clever    ?? null
+  const estimated   = overrides.estimated_minutes ?? idea.extracted_estimated_min ?? null
 
   if (!title || !description) {
     return NextResponse.json({ error: 'title and description are required' }, { status: 400 })
   }
 
+  // Near-duplicate check (skip if ?force=true)
+  if (!force) {
+    const dup = await checkDuplicate(supabase, title, tools)
+    if (dup.isDuplicate) {
+      return NextResponse.json(
+        {
+          error:      'Near-duplicate detected — add ?force=true to publish anyway',
+          matchId:    dup.matchId,
+          matchTitle: dup.matchTitle,
+          similarity: dup.similarity,
+        },
+        { status: 409 }
+      )
+    }
+  }
+
   const diagram_data = stepsTodiagram(steps)
 
-  // Insert the flow
   const { data: flow, error: insertErr } = await supabase
     .from('flows')
     .insert({
@@ -60,10 +87,10 @@ export async function POST(
       steps,
       diagram_data,
       why_clever,
-      estimated_minutes,
-      source_url:  idea.source_url,
-      author_name: 'RunGTM',
-      status:      'published',
+      estimated_minutes: estimated,
+      source_url:        idea.source_url,
+      author_name:       'RunGTM',
+      status:            'published',
     })
     .select()
     .single()
@@ -72,7 +99,6 @@ export async function POST(
     return NextResponse.json({ error: insertErr.message }, { status: 500 })
   }
 
-  // Mark idea as approved
   await supabase
     .from('flow_ideas')
     .update({

@@ -4,6 +4,7 @@ import { NextRequest, NextResponse } from 'next/server'
 import { createServiceClient } from '@/lib/supabase/server'
 import { fetchPostsForSource } from '@/lib/scraper'
 import { extractFlowFromPost } from '@/lib/claude'
+import { checkDuplicate } from '@/lib/dedup'
 import { stepsTodiagram } from '@/lib/utils'
 import type { ScrapeSource, Platform } from '@/lib/types'
 
@@ -14,7 +15,8 @@ const AUTO_PUBLISH_THRESHOLD = 0.85
  * Called by Vercel Cron or admin trigger — scrapes all active sources,
  * runs Claude extraction, and saves results as flow_ideas.
  *
- * Auth: accepts either CRON_SECRET (for cron) or ADMIN_SECRET_KEY (for manual trigger).
+ * Auth: Authorization: Bearer CRON_SECRET  (Vercel Cron)
+ *    OR x-admin-key: ADMIN_SECRET_KEY       (manual admin trigger)
  */
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get('authorization')
@@ -39,6 +41,7 @@ export async function POST(req: NextRequest) {
 
   let totalProcessed = 0
   let totalPublished = 0
+  let totalSkipped   = 0   // near-duplicates skipped
   const errors: string[] = []
 
   for (const source of sources) {
@@ -47,7 +50,7 @@ export async function POST(req: NextRequest) {
       const posts = await fetchPostsForSource(source.platform as Platform, source.handle)
 
       for (const post of posts) {
-        // Skip already-seen URLs (deduplication)
+        // Skip already-seen URLs (exact URL deduplication)
         const { data: existing } = await supabase
           .from('flow_ideas')
           .select('id')
@@ -56,10 +59,10 @@ export async function POST(req: NextRequest) {
 
         if (existing) continue
 
-        // 3. Run Claude extraction with platform context
+        // 3. Run Claude extraction with platform + URL context
         const extracted = await extractFlowFromPost(post.content, {
           url:      post.source_url,
-          platform: post.platform,
+          platform: post.platform ?? source.platform,
         })
 
         // Skip posts Claude determined aren't GTM flows
@@ -67,35 +70,60 @@ export async function POST(req: NextRequest) {
 
         totalProcessed++
 
-        const willAutoPublish = extracted.confidence >= AUTO_PUBLISH_THRESHOLD
-        const ideaStatus = willAutoPublish ? 'approved' : 'pending'
+        const steps       = extracted.steps ?? []
+        const autoPublish = extracted.confidence >= AUTO_PUBLISH_THRESHOLD
 
-        const ideaPayload = {
-          source_id:               source.id,
-          platform:                post.platform,
-          source_url:              post.source_url,
-          raw_content:             post.content,
-          extracted_title:         extracted.title,
-          extracted_desc:          extracted.description,
-          extracted_tools:         extracted.tools,
-          extracted_steps:         extracted.steps,
-          extracted_category:      extracted.category,
-          extracted_why_clever:    extracted.why_clever,
-          extracted_estimated_min: extracted.estimated_minutes,
-          is_gtm_flow:             extracted.is_gtm_flow,
-          confidence:              extracted.confidence,
-          status:                  ideaStatus,
+        // 4. Before auto-publishing, check for near-duplicate flows
+        if (autoPublish) {
+          const dup = await checkDuplicate(supabase, extracted.title, extracted.tools)
+          if (dup.isDuplicate) {
+            totalSkipped++
+            // Save as pending so admin can review the similar content
+            await supabase.from('flow_ideas').insert({
+              source_id:               source.id,
+              platform:                post.platform ?? source.platform,
+              source_url:              post.source_url,
+              raw_content:             post.content,
+              extracted_title:         extracted.title,
+              extracted_desc:          extracted.description,
+              extracted_tools:         extracted.tools,
+              extracted_steps:         steps,
+              extracted_category:      extracted.category,
+              extracted_why_clever:    extracted.why_clever,
+              extracted_estimated_min: extracted.estimated_minutes,
+              is_gtm_flow:             extracted.is_gtm_flow,
+              confidence:              extracted.confidence,
+              status:                  'pending',
+            })
+            continue
+          }
         }
 
+        // 5. Save idea
         const { data: idea } = await supabase
           .from('flow_ideas')
-          .insert(ideaPayload)
+          .insert({
+            source_id:               source.id,
+            platform:                post.platform ?? source.platform,
+            source_url:              post.source_url,
+            raw_content:             post.content,
+            extracted_title:         extracted.title,
+            extracted_desc:          extracted.description,
+            extracted_tools:         extracted.tools,
+            extracted_steps:         steps,
+            extracted_category:      extracted.category,
+            extracted_why_clever:    extracted.why_clever,
+            extracted_estimated_min: extracted.estimated_minutes,
+            is_gtm_flow:             extracted.is_gtm_flow,
+            confidence:              extracted.confidence,
+            status:                  autoPublish ? 'approved' : 'pending',
+          })
           .select('id')
           .single()
 
-        // 4. Auto-publish high-confidence flows
-        if (idea && willAutoPublish) {
-          const diagram_data = stepsTodiagram(extracted.steps)
+        // 6. Auto-publish high-confidence, non-duplicate flows
+        if (idea && autoPublish) {
+          const diagram_data = stepsTodiagram(steps)
 
           const { data: publishedFlow } = await supabase
             .from('flows')
@@ -103,13 +131,13 @@ export async function POST(req: NextRequest) {
               title:             extracted.title,
               description:       extracted.description,
               tools:             extracted.tools,
-              steps:             extracted.steps,
-              category:          extracted.category,
+              steps,
+              category:          extracted.category ?? 'Other',
               diagram_data,
               source_url:        post.source_url,
-              author_name:       post.author,
-              why_clever:        extracted.why_clever,
-              estimated_minutes: extracted.estimated_minutes,
+              author_name:       post.author ?? 'RunGTM',
+              why_clever:        extracted.why_clever        || null,
+              estimated_minutes: extracted.estimated_minutes ?? null,
               status:            'published',
             })
             .select('id')
@@ -145,6 +173,7 @@ export async function POST(req: NextRequest) {
     ok:        true,
     processed: totalProcessed,
     published: totalPublished,
+    skipped:   totalSkipped,
     errors:    errors.length ? errors : undefined,
   })
 }
