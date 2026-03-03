@@ -72,12 +72,12 @@ export async function GET(req: NextRequest) {
 
   // ── Process ideas stats ──
   const ideas = ideasAll.data ?? []
-  const ideaStatusCounts = ideas.reduce((acc: Record<string, number>, { status }) => {
+  const ideaStatusCounts = ideas.reduce((acc: Record<string, number>, { status }: { status: string }) => {
     acc[status] = (acc[status] ?? 0) + 1
     return acc
   }, {} as Record<string, number>)
 
-  const platformMap = (ideasByPlatform.data ?? []).reduce((acc: Record<string, number>, { platform }) => {
+  const platformMap = (ideasByPlatform.data ?? []).reduce((acc: Record<string, number>, { platform }: { platform: string }) => {
     acc[platform] = (acc[platform] ?? 0) + 1
     return acc
   }, {} as Record<string, number>)
@@ -113,7 +113,7 @@ export async function GET(req: NextRequest) {
 
   // ── Process flows stats ──
   const flows = flowsCounts.data ?? []
-  const flowStatusCounts = flows.reduce<Record<string, number>>((acc, { status }) => {
+  const flowStatusCounts = flows.reduce((acc: Record<string, number>, { status }: { status: string }) => {
     acc[status] = (acc[status] ?? 0) + 1
     return acc
   }, {})
