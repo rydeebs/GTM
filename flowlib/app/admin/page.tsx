@@ -46,7 +46,7 @@ export default function AdminPage() {
   async function triggerScrape() {
     const res = await fetch('/api/scrape', {
       method:  'POST',
-      headers: { authorization: `Bearer ${process.env.NEXT_PUBLIC_CRON_SECRET ?? adminKey}` },
+      headers: { 'x-admin-key': adminKey },
     })
     const json = await res.json()
     toast({ title: `Scraped: ${json.processed ?? 0} ideas found, ${json.published ?? 0} auto-published` })
@@ -82,6 +82,9 @@ export default function AdminPage() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Admin — Flow Ideas Review</h1>
         <div className="flex gap-2">
+          <a href="/admin/sources">
+            <Button variant="outline" size="sm">Sources</Button>
+          </a>
           <a href="/admin/import">
             <Button variant="outline" size="sm">+ Import Flow</Button>
           </a>
