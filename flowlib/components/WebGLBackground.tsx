@@ -34,6 +34,46 @@ void main() {
 }
 `
 
+// ── Title: transparent aurora that glows behind the h1 headline ──────────────
+// Flowing horizontal bands: electric blue → violet → cyan — semi-transparent
+// so the hero background shows through. Canvas uses alpha:true + blending.
+const TITLE_FRAG = `
+precision highp float;
+uniform vec2  resolution;
+uniform float time;
+
+void main() {
+  vec2 uv = gl_FragCoord.xy / resolution;
+  float t  = time * 0.55;
+
+  /* warp horizontal axis with a slow vertical sine for organic flow */
+  float x  = uv.x + sin(uv.y * 4.5 + t * 0.55) * 0.13;
+
+  /* three overlapping aurora bands */
+  float w1 = sin(x * 10.0 + t)         * 0.5 + 0.5;
+  float w2 = sin(x * 17.0 - t * 1.1)   * 0.5 + 0.5;
+  float w3 = sin(x *  7.0 + t * 0.38)  * 0.5 + 0.5;
+  float aurora = pow(w1 * 0.50 + w2 * 0.30 + w3 * 0.20, 1.5);
+
+  /* vignette: full opacity in centre, fade at top/bottom and side edges */
+  float vy = smoothstep(0.0, 0.28, uv.y) * smoothstep(1.0, 0.72, uv.y);
+  float vx = smoothstep(0.0, 0.05, uv.x) * smoothstep(1.0, 0.95, uv.x);
+  float mask = vy * vx;
+
+  /* electric blue → violet → cyan colour ramp */
+  vec3 blue   = vec3(0.15, 0.35, 1.00);   /* #2659ff */
+  vec3 violet = vec3(0.55, 0.12, 0.92);   /* #8c1eeb */
+  vec3 cyan   = vec3(0.00, 0.70, 1.00);   /* #00b2ff */
+
+  vec3 col = mix(blue, violet, w1 * 0.85);
+  col      = mix(col,  cyan,   w2 * w3 * 0.55);
+  col     += 0.06;  /* lift blacks slightly */
+
+  float alpha = aurora * mask * 0.68;
+  gl_FragColor = vec4(col, alpha);
+}
+`
+
 // ── Dark CTA: domain-warped fractal noise with blue/purple glow ──────────────
 // Uses fBm domain-warping (Inigo Quilez technique) for organic flowing motion
 const DARK_FRAG = `
@@ -121,7 +161,7 @@ function buildProgram(gl: WebGLRenderingContext, fragSrc: string) {
 }
 
 // ── Component ─────────────────────────────────────────────────────────────────
-interface Props { variant: 'hero' | 'dark'; className?: string }
+interface Props { variant: 'hero' | 'dark' | 'title'; className?: string }
 
 export function WebGLBackground({ variant, className }: Props) {
   const canvasRef = useRef<HTMLCanvasElement>(null)
@@ -130,14 +170,29 @@ export function WebGLBackground({ variant, className }: Props) {
     const canvas = canvasRef.current
     if (!canvas) return
 
-    // Request WebGL — fall back silently if unavailable
-    const gl = canvas.getContext('webgl', { antialias: false, alpha: false })
+    // title variant needs a transparent canvas so the hero bg shows through
+    const transparent = variant === 'title'
+    const gl = canvas.getContext('webgl', {
+      antialias:         false,
+      alpha:             transparent,
+      premultipliedAlpha: false,
+    })
     if (!gl) return
 
-    const prog = buildProgram(gl, variant === 'hero' ? HERO_FRAG : DARK_FRAG)
+    const fragSrc =
+      variant === 'hero'  ? HERO_FRAG  :
+      variant === 'title' ? TITLE_FRAG :
+                            DARK_FRAG
+    const prog = buildProgram(gl, fragSrc)
     if (!prog) return
 
     gl.useProgram(prog)
+
+    if (transparent) {
+      gl.enable(gl.BLEND)
+      gl.blendFunc(gl.SRC_ALPHA, gl.ONE_MINUS_SRC_ALPHA)
+      gl.clearColor(0, 0, 0, 0)
+    }
 
     // Full-screen quad (triangle strip)
     const buf = gl.createBuffer()
@@ -169,6 +224,7 @@ export function WebGLBackground({ variant, className }: Props) {
     const t0 = performance.now()
     let raf: number
     const tick = () => {
+      if (transparent) gl.clear(gl.COLOR_BUFFER_BIT)
       gl.uniform2f(uRes, canvas.width, canvas.height)
       gl.uniform1f(uTime, (performance.now() - t0) * 0.001)
       gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4)
@@ -185,7 +241,11 @@ export function WebGLBackground({ variant, className }: Props) {
   return (
     <canvas
       ref={canvasRef}
-      style={{ position: 'absolute', inset: 0, width: '100%', height: '100%', display: 'block' }}
+      style={{
+        position: 'absolute', inset: 0,
+        width: '100%', height: '100%',
+        display: 'block', pointerEvents: 'none',
+      }}
       className={className}
     />
   )

@@ -36,14 +36,17 @@ export default async function HomePage() {
             </span>
           </div>
 
-          {/* Headline — mixed weights like workflows.io */}
-          <h1 className="text-6xl sm:text-7xl lg:text-[5.5rem] font-black leading-[0.95] tracking-tight mb-8">
-            <span className="block">Discover &amp; run</span>
-            <span className="block text-foreground/25 font-light italic">
-              the best GTM
-            </span>
-            <span className="block">automation flows</span>
-          </h1>
+          {/* Headline — aurora WebGL glow floats behind the text */}
+          <div className="relative mb-8 py-4">
+            <WebGLBackground variant="title" className="rounded-2xl" />
+            <h1 className="relative z-10 text-6xl sm:text-7xl lg:text-[5.5rem] font-black leading-[0.95] tracking-tight">
+              <span className="block">Discover &amp; run</span>
+              <span className="block text-foreground/25 font-light italic">
+                the best GTM
+              </span>
+              <span className="block">automation flows</span>
+            </h1>
+          </div>
 
           <p className="text-lg text-foreground/50 max-w-xl mx-auto mb-10 leading-relaxed">
             Browse, fork, and deploy automation flows built with Zapier, Clay,
