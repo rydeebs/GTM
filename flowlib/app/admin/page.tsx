@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 import { Check, X, ExternalLink, RefreshCw } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Badge } from '@/components/ui/badge'
@@ -82,6 +82,9 @@ export default function AdminPage() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Admin — Flow Ideas Review</h1>
         <div className="flex gap-2">
+          <a href="/admin/import">
+            <Button variant="outline" size="sm">+ Import Flow</Button>
+          </a>
           <Button variant="outline" size="sm" onClick={() => fetchIdeas()} disabled={loading}>
             <RefreshCw className={`h-4 w-4 mr-1 ${loading ? 'animate-spin' : ''}`} />
             Refresh
@@ -114,7 +117,7 @@ export default function AdminPage() {
       ) : (
         <div className="space-y-4">
           {ideas.map(idea => (
-            <div key={idea.id} className="border border-border rounded-xl p-5 bg-white">
+            <div key={idea.id} className="border border-border rounded-xl p-5 bg-card">
               <div className="flex items-start justify-between gap-4">
                 <div className="flex-1 min-w-0">
                   <div className="flex items-center gap-2 mb-2">
@@ -140,7 +143,7 @@ export default function AdminPage() {
 
                   <details className="text-xs text-muted-foreground">
                     <summary className="cursor-pointer hover:text-foreground">Raw content</summary>
-                    <pre className="mt-2 whitespace-pre-wrap font-mono bg-gray-50 p-3 rounded-lg max-h-40 overflow-auto border border-border">
+                    <pre className="mt-2 whitespace-pre-wrap font-mono bg-background p-3 rounded-lg max-h-40 overflow-auto border border-border">
                       {idea.raw_content}
                     </pre>
                   </details>
