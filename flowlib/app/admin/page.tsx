@@ -82,6 +82,9 @@ export default function AdminPage() {
       <div className="flex items-center justify-between mb-6">
         <h1 className="text-2xl font-bold">Admin — Flow Ideas Review</h1>
         <div className="flex gap-2">
+          <a href="/admin/metrics">
+            <Button variant="outline" size="sm">Metrics</Button>
+          </a>
           <a href="/admin/sources">
             <Button variant="outline" size="sm">Sources</Button>
           </a>

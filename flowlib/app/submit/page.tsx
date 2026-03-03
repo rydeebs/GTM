@@ -1,8 +1,7 @@
 'use client'
 
 import { useState } from 'react'
-import { useRouter } from 'next/navigation'
-import { Plus, Trash2 } from 'lucide-react'
+import { Plus, Trash2, CheckCircle2 } from 'lucide-react'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
@@ -15,8 +14,8 @@ import type { FlowStep } from '@/lib/types'
 const EMPTY_STEP: FlowStep = { label: '', app: '', action: '', description: '' }
 
 export default function SubmitPage() {
-  const router  = useRouter()
-  const [loading, setLoading] = useState(false)
+  const [loading,   setLoading]   = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   const [title,       setTitle]       = useState('')
   const [description, setDescription] = useState('')
@@ -78,11 +77,28 @@ export default function SubmitPage() {
         return
       }
 
-      toast({ title: 'Flow submitted!', description: 'Your flow is now live.' })
-      router.push(`/flows/${json.data.id}`)
+      setSubmitted(true)
     } finally {
       setLoading(false)
     }
+  }
+
+  if (submitted) {
+    return (
+      <div className="max-w-lg mx-auto mt-24 text-center space-y-4">
+        <CheckCircle2 className="h-12 w-12 text-primary mx-auto" />
+        <h2 className="text-2xl font-bold">Thanks for your submission!</h2>
+        <p className="text-muted-foreground">
+          Your flow is in the review queue. We&apos;ll publish it shortly after a quick check.
+        </p>
+        <button
+          onClick={() => setSubmitted(false)}
+          className="text-sm text-primary hover:underline"
+        >
+          Submit another flow →
+        </button>
+      </div>
+    )
   }
 
   return (

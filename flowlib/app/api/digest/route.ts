@@ -13,7 +13,12 @@ import type { Flow } from '@/lib/types'
  */
 export async function POST(req: NextRequest) {
   const authHeader = req.headers.get('authorization')
-  if (authHeader !== `Bearer ${process.env.CRON_SECRET}`) {
+  const adminKey   = req.headers.get('x-admin-key')
+
+  const cronOk  = authHeader === `Bearer ${process.env.CRON_SECRET}`
+  const adminOk = adminKey   === process.env.ADMIN_SECRET_KEY
+
+  if (!cronOk && !adminOk) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 })
   }
 

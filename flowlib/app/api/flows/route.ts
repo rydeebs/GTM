@@ -1,7 +1,7 @@
 export const dynamic = 'force-dynamic'
 
 import { NextRequest, NextResponse } from 'next/server'
-import { createClient } from '@/lib/supabase/server'
+import { createClient, createServiceClient } from '@/lib/supabase/server'
 import { stepsTodiagram } from '@/lib/utils'
 import { z } from 'zod'
 
@@ -62,10 +62,10 @@ export async function GET(req: NextRequest) {
   return NextResponse.json({ data, total: count, page, limit })
 }
 
-// POST /api/flows — submit a new flow
+// POST /api/flows — submit a new flow (goes into pending review)
 export async function POST(req: NextRequest) {
-  const supabase = await createClient()
-  const body     = await req.json()
+  const authClient = await createClient()
+  const body       = await req.json()
 
   const parsed = FlowSchema.safeParse(body)
   if (!parsed.success) {
@@ -74,10 +74,14 @@ export async function POST(req: NextRequest) {
 
   const input = parsed.data
 
-  // Auto-generate diagram if not provided
+  // Resolve the submitting user (may be anonymous)
+  const { data: { user } } = await authClient.auth.getUser()
+
   const diagram_data = stepsTodiagram(input.steps)
 
-  const { data: { user } } = await supabase.auth.getUser()
+  // Use service client to insert — the flows_insert RLS policy only allows
+  // author_id = auth.uid(), which blocks anonymous submissions.
+  const supabase = createServiceClient()
 
   const { data, error } = await supabase
     .from('flows')
@@ -86,7 +90,7 @@ export async function POST(req: NextRequest) {
       diagram_data,
       author_id:   user?.id ?? null,
       author_name: input.author_name || user?.email?.split('@')[0] || 'Anonymous',
-      status:      'published',
+      status:      'pending',   // goes into admin review queue, not live immediately
     })
     .select()
     .single()
