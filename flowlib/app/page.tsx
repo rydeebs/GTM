@@ -27,13 +27,6 @@ export default async function HomePage() {
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden min-h-[88vh] flex flex-col items-center justify-center px-6 pt-28 pb-20">
         <div className="relative z-10 text-center max-w-5xl mx-auto">
-          {/* Badge */}
-          <div className="inline-flex items-center border border-foreground/20 rounded-full px-4 py-1 mb-8">
-            <span className="text-[11px] font-semibold tracking-[0.12em] uppercase text-foreground/50">
-              For GTM Teams
-            </span>
-          </div>
-
           {/* Headline */}
           <div className="relative mb-8 py-4">
             <h1 className="relative z-10 text-[3.2rem] sm:text-[4.25rem] lg:text-[5.3rem] font-black leading-[1.05] tracking-tight">
@@ -44,8 +37,7 @@ export default async function HomePage() {
           </div>
 
           <p className="text-lg text-foreground/50 max-w-xl mx-auto mb-10 leading-relaxed">
-            Browse, fork, and deploy automation flows built with Zapier, Clay,
-            Make, Apollo, and more — curated by the GTM community.
+            Browse, fork, and deploy automation flows — curated by the GTM community.
           </p>
 
           {/* CTAs */}
@@ -136,14 +128,20 @@ export default async function HomePage() {
             A hand-picked GTM automation explained in full detail, delivered to
             your inbox every morning.
           </p>
-          <div className="max-w-sm mx-auto">
-            <div className="flex overflow-hidden ring-1 ring-white/15 shadow-2xl">
+          <div className="max-w-lg mx-auto">
+            <div className="flex items-stretch rounded-2xl overflow-hidden bg-white/8 ring-1 ring-white/15 backdrop-blur-sm shadow-2xl">
               <input
                 type="email"
-                placeholder="Enter your email"
-                className="flex-1 px-4 py-3 text-sm text-gray-900 bg-white/95 backdrop-blur-sm outline-none placeholder:text-gray-400"
+                placeholder="Email"
+                className="flex-1 min-w-0 px-5 py-4 text-sm bg-transparent text-white placeholder:text-white/40 outline-none"
               />
-              <button className="px-5 py-3 bg-[#3b82f6] text-white text-sm font-semibold hover:bg-[#60a5fa] transition-colors whitespace-nowrap">
+              <div className="w-px bg-white/15 my-3" />
+              <input
+                type="text"
+                placeholder="Full name"
+                className="flex-1 min-w-0 px-5 py-4 text-sm bg-transparent text-white placeholder:text-white/40 outline-none"
+              />
+              <button className="px-6 py-4 m-1.5 rounded-xl bg-[#3b82f6] text-white text-sm font-semibold hover:bg-[#60a5fa] transition-colors whitespace-nowrap">
                 Subscribe
               </button>
             </div>
