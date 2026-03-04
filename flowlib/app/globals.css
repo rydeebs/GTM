@@ -47,7 +47,7 @@
     -webkit-font-smoothing: antialiased;
   }
   h1, h2 {
-    font-family: var(--font-coda), system-ui, sans-serif;
+    font-family: var(--font-heading), monospace;
   }
   h3, h4, h5, h6 {
     font-family: var(--font-code), monospace;

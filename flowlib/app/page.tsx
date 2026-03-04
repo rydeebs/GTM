@@ -26,8 +26,6 @@ export default async function HomePage() {
 
       {/* ── Hero ──────────────────────────────────────────────────────── */}
       <section className="relative overflow-hidden min-h-[88vh] flex flex-col items-center justify-center px-6 pt-28 pb-20">
-        <WebGLBackground variant="hero" />
-
         <div className="relative z-10 text-center max-w-5xl mx-auto">
           {/* Badge */}
           <div className="inline-flex items-center border border-foreground/20 rounded-full px-4 py-1 mb-8">
@@ -36,15 +34,11 @@ export default async function HomePage() {
             </span>
           </div>
 
-          {/* Headline — aurora WebGL glow floats behind the text */}
+          {/* Headline */}
           <div className="relative mb-8 py-4">
-            <WebGLBackground variant="title" className="rounded-2xl" />
-            <h1 className="relative z-10 text-6xl sm:text-7xl lg:text-[5.5rem] font-black leading-[0.95] tracking-tight">
-              <span className="block">Discover &amp; run</span>
-              <span className="block text-foreground/25 font-light italic">
-                the best GTM
-              </span>
-              <span className="block">automation flows</span>
+            <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight">
+              <span className="block">Discover &amp; run the best</span>
+              <span className="block text-foreground/25 font-light italic">GTM Automation Flows</span>
             </h1>
           </div>
 
@@ -129,13 +123,13 @@ export default async function HomePage() {
       )}
 
       {/* ── Dark CTA ──────────────────────────────────────────────────── */}
-      <section className="relative overflow-hidden bg-[#0d0d0d] px-6 sm:px-10 lg:px-16 py-32">
+      <section className="relative overflow-hidden bg-[#0d0d0d] px-6 sm:px-10 lg:px-16 py-16">
         <WebGLBackground variant="dark" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-white/25 mb-5">
+          <p className="text-[10px] font-semibold tracking-[0.14em] uppercase text-white/25 mb-4">
             Daily digest
           </p>
-          <h2 className="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[0.95] tracking-tight mb-6">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[0.95] tracking-tight mb-5">
             Get one great flow,
             <br />
             <span className="text-white/25 font-light italic">every single day</span>
