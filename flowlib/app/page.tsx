@@ -37,8 +37,9 @@ export default async function HomePage() {
           {/* Headline */}
           <div className="relative mb-8 py-4">
             <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight">
-              <span className="block">Discover &amp; run the best</span>
-              <span className="block text-foreground/25 font-light italic">GTM Automation Flows</span>
+              <span className="block">Discover &amp; Run</span>
+              <span className="block text-foreground/25">the best</span>
+              <span className="block">GTM Automation Flows</span>
             </h1>
           </div>
 
