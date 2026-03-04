@@ -28,7 +28,7 @@ export function Navbar() {
       <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
         <nav className="flex items-center gap-6 bg-[#1c1c1c] text-white rounded-full px-6 py-2.5 ring-1 ring-white/10 shadow-2xl shadow-black/40">
           <Link href="/" className="flex items-center">
-            <Image src="/logo.png" alt="RunGTM" width={90} height={22} className="h-5 w-auto" />
+            <Image src="/logo.png" alt="RunGTM" width={90} height={22} className="h-5 w-auto" onError={(e) => { (e.target as HTMLImageElement).src = '/logo.svg' }} />
           </Link>
           <div className="hidden sm:flex items-center gap-5">
             {navLinks}
@@ -49,7 +49,7 @@ export function Navbar() {
     <nav className="fixed top-0 left-0 right-0 z-50 px-6 sm:px-10 py-5">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center">
-          <Image src="/logo.png" alt="RunGTM" width={120} height={28} className="h-7 w-auto" />
+          <Image src="/logo.png" alt="RunGTM" width={120} height={28} className="h-7 w-auto" onError={(e) => { (e.target as HTMLImageElement).src = '/logo.svg' }} />
         </Link>
         <div className="hidden sm:flex items-center gap-6">
           {navLinks}
