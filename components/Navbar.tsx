@@ -19,8 +19,9 @@ export function Navbar() {
 
   const navLinks = (
     <>
-      <Link href="/flows" className="text-xs font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all hover:bg-gray-900 hover:text-white">Library</Link>
-      <Link href="/ideas" className="text-xs font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all hover:bg-gray-900 hover:text-white">Ideas</Link>
+      <Link href="/flows"           className="text-xs font-semibold tracking-widest uppercase hover:opacity-60 transition-opacity text-inherit">Library</Link>
+      <Link href="/flow-of-the-day" className="text-xs font-semibold tracking-widest uppercase hover:opacity-60 transition-opacity text-inherit">Flow of the Day</Link>
+      <Link href="/ideas"           className="text-xs font-semibold tracking-widest uppercase hover:opacity-60 transition-opacity text-inherit">Ideas</Link>
     </>
   )
 
@@ -39,7 +40,7 @@ export function Navbar() {
             href="/submit"
             className="ml-2 text-xs font-semibold tracking-widest uppercase bg-[#3b82f6] text-white px-4 py-1.5 rounded-full hover:bg-[#60a5fa] transition-colors"
           >
-            New +
+            Submit a Flow
           </Link>
         </nav>
       </div>
@@ -69,9 +70,9 @@ export function Navbar() {
         </div>
         <Link
           href="/submit"
-          className="text-xs font-semibold tracking-widest uppercase border border-foreground/20 px-4 py-1.5 rounded-full hover:bg-gray-900 hover:text-white hover:border-gray-900 transition-all"
+          className="text-xs font-semibold tracking-widest uppercase border border-foreground/20 px-4 py-1.5 rounded-full hover:bg-foreground/5 transition-colors"
         >
-          New +
+          Submit a Flow
         </Link>
       </div>
     </nav>
