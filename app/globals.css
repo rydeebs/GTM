@@ -42,15 +42,15 @@
   body {
     background-color: hsl(var(--background));
     color: hsl(var(--foreground));
-    font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
   }
   h1, h2 {
     font-family: var(--font-heading), monospace;
   }
-  h3, h4, h5, h6 {
-    font-family: 'Helvetica Neue';
+  h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
 
