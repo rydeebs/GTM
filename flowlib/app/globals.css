@@ -50,7 +50,7 @@
     font-family: var(--font-heading), monospace;
   }
   h3, h4, h5, h6 {
-    font-family: var(--font-code), monospace;
+    font-family: 'Helvetica Neue';
   }
 }
 
