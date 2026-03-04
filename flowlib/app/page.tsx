@@ -36,7 +36,7 @@ export default async function HomePage() {
 
           {/* Headline */}
           <div className="relative mb-8 py-4">
-            <h1 className="relative z-10 text-4xl sm:text-5xl lg:text-6xl font-black leading-[1.05] tracking-tight">
+            <h1 className="relative z-10 text-[3.2rem] sm:text-[4.25rem] lg:text-[5.3rem] font-black leading-[1.05] tracking-tight">
               <span className="block">Discover &amp; Run</span>
               <span className="block text-foreground/25">the best</span>
               <span className="block">GTM Automation Flows</span>
@@ -127,31 +127,26 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-[#0d0d0d] px-6 sm:px-10 lg:px-16 py-16">
         <WebGLBackground variant="dark" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <p className="text-[10px] font-semibold tracking-[0.14em] uppercase text-white/25 mb-4">
-            Daily digest
-          </p>
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[0.95] tracking-tight mb-5">
             Get one great flow,
             <br />
             <span className="text-white/25 font-light italic">every single day</span>
           </h2>
-          <p className="text-white/40 text-base max-w-md mx-auto mb-10 leading-relaxed">
+          <p className="text-white/40 text-base max-w-md mx-auto mb-8 leading-relaxed">
             A hand-picked GTM automation explained in full detail, delivered to
             your inbox every morning.
           </p>
-          <div className="flex items-center justify-center gap-4">
-            <Link
-              href="/flow-of-the-day"
-              className="inline-flex items-center gap-2 bg-[#3b82f6] text-white text-sm font-bold px-7 py-3 rounded-full hover:bg-[#60a5fa] active:bg-[#1d4ed8] transition-colors"
-            >
-              See Today&apos;s Flow <ArrowRight className="h-4 w-4" />
-            </Link>
-            <Link
-              href="/flows"
-              className="text-sm text-white/35 hover:text-white transition-colors flex items-center gap-1"
-            >
-              Browse all flows <ArrowRight className="h-3.5 w-3.5" />
-            </Link>
+          <div className="max-w-sm mx-auto">
+            <div className="flex overflow-hidden ring-1 ring-white/15 shadow-2xl">
+              <input
+                type="email"
+                placeholder="Enter your email"
+                className="flex-1 px-4 py-3 text-sm text-gray-900 bg-white/95 backdrop-blur-sm outline-none placeholder:text-gray-400"
+              />
+              <button className="px-5 py-3 bg-[#3b82f6] text-white text-sm font-semibold hover:bg-[#60a5fa] transition-colors whitespace-nowrap">
+                Subscribe
+              </button>
+            </div>
           </div>
         </div>
       </section>
