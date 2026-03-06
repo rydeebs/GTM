@@ -53,7 +53,7 @@ export function Footer() {
             <div className="w-5 h-5 rounded bg-[#3b82f6]/20 flex items-center justify-center">
               <Zap className="w-3 h-3 text-[#3b82f6]" />
             </div>
-            <span className="text-sm font-semibold text-white/90 tracking-tight">FlowLib</span>
+            <span className="text-sm font-semibold text-white/90 tracking-tight">RunGTM</span>
           </div>
           
           {/* Vertical connector from trigger */}
@@ -125,7 +125,7 @@ export function Footer() {
           <div className="flex items-center gap-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg px-4 py-2 mt-0">
             <div className="w-1.5 h-1.5 rounded-full bg-white/30" />
             <span className="text-xs text-white/40 tracking-tight">
-              © 2025 FlowLib. All rights reserved.
+              © 2026 RunGTM. All rights reserved.
             </span>
           </div>
         </div>
