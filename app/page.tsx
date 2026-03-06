@@ -6,6 +6,7 @@ import { HowItWorks } from '@/components/HowItWorks'
 import { FeaturedCategories } from '@/components/FeaturedCategories'
 import { Testimonials } from '@/components/Testimonials'
 import { LogoMarquee } from '@/components/LogoMarquee'
+import { Footer } from '@/components/Footer'
 import type { Flow } from '@/lib/types'
 
 export default async function HomePage() {
@@ -200,6 +201,9 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* ── Footer ────────────────────────────────────────────────────── */}
+      <Footer />
 
     </div>
   )
