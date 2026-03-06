@@ -12,6 +12,7 @@ const config: Config = {
       fontFamily: {
         sans: ['var(--font-sans)', 'system-ui', '-apple-system', 'sans-serif'],
         body: ['"Helvetica Neue"', 'Helvetica', 'Arial', 'sans-serif'],
+        heading: ['var(--font-heading)', '"Bebas Neue"', 'sans-serif'],
       },
       colors: {
         border: 'hsl(var(--border))',

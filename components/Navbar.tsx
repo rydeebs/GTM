@@ -17,10 +17,10 @@ export function Navbar() {
   const scrolled    = scrollY > 60   // pill
   const anyScrolled = scrollY > 0    // full-width bar gets glass bg
 
-  const navLinks = (
+  const navLinks = (scrolled: boolean) => (
     <>
-      <Link href="/flows" className="text-xs font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all hover:bg-gray-900 hover:text-white">Library</Link>
-      <Link href="/ideas" className="text-xs font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all hover:bg-gray-900 hover:text-white">Ideas</Link>
+      <Link href="/flows" className={`text-xs font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all ${scrolled ? 'hover:bg-gray-200 hover:text-gray-900' : 'hover:bg-white/20 hover:text-white'}`}>Library</Link>
+      <Link href="/ideas" className={`text-xs font-semibold tracking-widest uppercase px-3 py-1.5 rounded-full transition-all ${scrolled ? 'hover:bg-gray-200 hover:text-gray-900' : 'hover:bg-white/20 hover:text-white'}`}>Ideas</Link>
     </>
   )
 
@@ -33,7 +33,7 @@ export function Navbar() {
             <Image src="/whitelogo.png" alt="RunGTM" width={90} height={22} className="h-5 w-auto" onError={(e) => { (e.target as HTMLImageElement).src = '/logo.svg' }} />
           </Link>
           <div className="hidden sm:flex items-center gap-5">
-            {navLinks}
+            {navLinks(true)}
           </div>
           <Link
             href="/submit"
@@ -46,17 +46,13 @@ export function Navbar() {
     )
   }
 
-  /* ── Full-width top bar ─────────────────────────────────────────── */
+  /* ── Full-width top bar (dark background until pill) ─────────────── */
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 px-6 sm:px-10 py-5 transition-colors duration-300 ${
-      anyScrolled
-        ? 'bg-white/70 backdrop-blur-md text-gray-900 ring-1 ring-black/10 shadow-md'
-        : 'bg-transparent'
-    }`}>
+    <nav className="fixed top-0 left-0 right-0 z-50 px-6 sm:px-10 py-5 bg-[#121212] text-white">
       <div className="max-w-7xl mx-auto flex items-center justify-between">
         <Link href="/" className="flex items-center">
           <Image
-            src={anyScrolled ? '/whitelogo.png' : '/logo.png'}
+            src="/logo.png"
             alt="RunGTM"
             width={120}
             height={28}
@@ -64,12 +60,12 @@ export function Navbar() {
             onError={(e) => { (e.target as HTMLImageElement).src = '/logo.svg' }}
           />
         </Link>
-        <div className="hidden sm:flex items-center gap-6">
-          {navLinks}
+        <div className="hidden sm:flex items-center gap-6 text-white">
+          {navLinks(false)}
         </div>
         <Link
           href="/submit"
-          className="text-xs font-semibold tracking-widest uppercase border border-foreground/20 px-4 py-1.5 rounded-full hover:bg-foreground hover:text-background transition-all"
+          className="text-xs font-semibold tracking-widest uppercase border border-white/30 text-white px-4 py-1.5 rounded-full hover:bg-white hover:text-gray-900 transition-all"
         >
           New +
         </Link>
