@@ -161,19 +161,6 @@ export default async function HomePage() {
           </div>
         </div>
 
-        {/* CSS animation for the connector line */}
-        <style jsx>{`
-          @keyframes flowLine {
-            0%, 100% {
-              transform: translateX(0%);
-              opacity: 0.4;
-            }
-            50% {
-              transform: translateX(100%);
-              opacity: 0.8;
-            }
-          }
-        `}</style>
       </section>
 
       {/* ── Top Flows ─────────────────────────────────────────────────── */}

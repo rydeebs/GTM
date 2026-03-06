@@ -70,3 +70,15 @@
     display: none;
   }
 }
+
+/* How It Works connector line animation */
+@keyframes flowLine {
+  0%, 100% {
+    transform: translateX(0%);
+    opacity: 0.4;
+  }
+  50% {
+    transform: translateX(100%);
+    opacity: 0.8;
+  }
+}
