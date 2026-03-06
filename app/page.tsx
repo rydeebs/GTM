@@ -5,6 +5,7 @@ import { WebGLBackground } from '@/components/WebGLBackground'
 import { HowItWorks } from '@/components/HowItWorks'
 import { FeaturedCategories } from '@/components/FeaturedCategories'
 import { Testimonials } from '@/components/Testimonials'
+import { LogoMarquee } from '@/components/LogoMarquee'
 import type { Flow } from '@/lib/types'
 
 export default async function HomePage() {
@@ -59,17 +60,8 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {/* Tool tags */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {['Zapier', 'Clay', 'Make', 'Apollo', 'n8n', 'HeyReach', 'Instantly', 'Smartlead'].map(tool => (
-              <span
-                key={tool}
-                className="text-xs border border-foreground/12 text-foreground/40 px-3 py-1 rounded-full"
-              >
-                {tool}
-              </span>
-            ))}
-          </div>
+          {/* Logo Marquee */}
+          <LogoMarquee />
         </div>
       </section>
 
