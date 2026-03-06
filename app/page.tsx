@@ -88,6 +88,94 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── How It Works ──────────────────────────────────────────────── */}
+      <section className="border-t border-dashed border-foreground/10 bg-[#fafafa] dark:bg-[#0a0a0a]">
+        <div className="max-w-6xl mx-auto px-6 sm:px-10 lg:px-16 py-20">
+          <div className="text-center mb-16">
+            <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-foreground/40 mb-3">
+              Get started in minutes
+            </p>
+            <h2 className="text-3xl sm:text-4xl font-black tracking-tight font-heading">
+              How It Works
+            </h2>
+          </div>
+
+          {/* Steps container */}
+          <div className="relative">
+            {/* Animated connector line - desktop only */}
+            <div className="hidden lg:block absolute top-1/2 left-[16.67%] right-[16.67%] -translate-y-1/2 h-px">
+              <div className="w-full h-full border-t-2 border-dashed border-foreground/10" />
+              <div 
+                className="absolute top-0 left-0 h-full w-1/2 border-t-2 border-dashed border-[#3b82f6]/40"
+                style={{
+                  animation: 'flowLine 3s ease-in-out infinite',
+                }}
+              />
+            </div>
+
+            {/* Steps grid */}
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-0">
+              {[
+                {
+                  num: '01',
+                  title: 'Browse the Library',
+                  desc: 'Filter by tool, use case, or category to find exactly what you need.',
+                },
+                {
+                  num: '02',
+                  title: 'Fork the Flow',
+                  desc: 'Copy any automation into your own stack with a single click.',
+                },
+                {
+                  num: '03',
+                  title: 'Run It',
+                  desc: 'Connect your tools and go live in minutes, no rebuilding from scratch.',
+                },
+              ].map((step, i) => (
+                <div
+                  key={step.num}
+                  className={`relative flex flex-col items-center text-center px-8 py-10 ${
+                    i < 2 ? 'lg:border-r lg:border-dashed lg:border-foreground/10' : ''
+                  } ${i > 0 ? 'border-t lg:border-t-0 border-dashed border-foreground/10' : ''}`}
+                >
+                  {/* Ghost step number */}
+                  <span className="absolute top-4 left-1/2 -translate-x-1/2 text-[7rem] sm:text-[8rem] font-black text-foreground/[0.04] leading-none select-none pointer-events-none">
+                    {step.num}
+                  </span>
+
+                  {/* Content */}
+                  <div className="relative z-10 mt-12">
+                    <div className="w-10 h-10 rounded-full bg-foreground/5 border border-foreground/10 flex items-center justify-center mb-6 mx-auto">
+                      <span className="text-sm font-bold text-foreground/60">{step.num}</span>
+                    </div>
+                    <h3 className="text-lg font-bold tracking-tight mb-3">
+                      {step.title}
+                    </h3>
+                    <p className="text-sm text-foreground/50 leading-relaxed max-w-[260px]">
+                      {step.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* CSS animation for the connector line */}
+        <style jsx>{`
+          @keyframes flowLine {
+            0%, 100% {
+              transform: translateX(0%);
+              opacity: 0.4;
+            }
+            50% {
+              transform: translateX(100%);
+              opacity: 0.8;
+            }
+          }
+        `}</style>
+      </section>
+
       {/* ── Top Flows ─────────────────────────────────────────────────── */}
       {topFlows && topFlows.length > 0 && (
         <section className="border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
