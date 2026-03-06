@@ -16,7 +16,7 @@ const categories = [
 
 export function FeaturedCategories() {
   return (
-    <section className="bg-[#0d0d0d] border-t border-white/[0.08] px-6 sm:px-10 lg:px-16 py-20">
+    <section className="bg-[#121212] border-t border-white/[0.08] px-6 sm:px-10 lg:px-16 py-20">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="flex items-end justify-between mb-12">

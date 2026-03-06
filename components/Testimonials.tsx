@@ -49,7 +49,7 @@ function getInitials(name: string) {
 
 export function Testimonials() {
   return (
-    <section className="bg-[#0a0a0a] border-t border-foreground/10 px-6 sm:px-10 lg:px-16 py-20">
+    <section className="bg-[#121212] border-t border-foreground/10 px-6 sm:px-10 lg:px-16 py-20">
       <div className="max-w-7xl mx-auto">
         {/* Header */}
         <div className="text-center mb-14">

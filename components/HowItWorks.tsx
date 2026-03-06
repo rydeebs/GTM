@@ -55,7 +55,7 @@ export function HowItWorks() {
   return (
     <section 
       ref={sectionRef}
-      className="relative bg-[#0d0d0d]"
+      className="relative bg-[#121212]"
       style={{ height: `${(steps.length + 0.5) * 100}vh` }}
     >
       {/* Fixed content container */}

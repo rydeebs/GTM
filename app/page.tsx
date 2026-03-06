@@ -66,7 +66,7 @@ export default async function HomePage() {
       </section>
 
       {/* ── Stats ─────────────────────────────────────────────────────── */}
-      <section className="border-t border-dashed border-foreground/10">
+      <section className="bg-[#121212] border-t border-dashed border-foreground/10">
         <div className="max-w-7xl mx-auto grid grid-cols-3 divide-x divide-dashed divide-foreground/10">
           {[
             { value: '500+', label: 'Automation Flows' },
@@ -91,7 +91,7 @@ export default async function HomePage() {
 
       {/* ── Top Flows ─────────────────────────────────────────────────── */}
       {topFlows && topFlows.length > 0 && (
-        <section className="border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
+        <section className="bg-[#121212] border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-10">
               <div>
@@ -155,7 +155,7 @@ export default async function HomePage() {
 
       {/* ── Recent flows showcase ─────────────────────────────────────── */}
       {recentFlows && recentFlows.length > 0 && (
-        <section className="border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
+        <section className="bg-[#121212] border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-8">
               <div>
