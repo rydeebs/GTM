@@ -7,20 +7,22 @@ export default function Icon() {
   return new ImageResponse(
     <div
       style={{
-        background: '#4F46E5',
+        background: '#121212',
         width: '100%',
         height: '100%',
-        borderRadius: '6px',
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
-        color: 'white',
-        fontSize: 20,
-        fontWeight: 700,
-        fontFamily: 'sans-serif',
       }}
     >
-      F
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/Run%20%285%29-lHpgkrpqju9MwViP36Jqcd5C4wGbkH.png"
+        alt="RunGTM"
+        width={28}
+        height={28}
+        style={{ objectFit: 'contain' }}
+      />
     </div>,
     { ...size },
   )
