@@ -29,10 +29,9 @@ export default async function HomePage() {
   return (
     <div className="-mt-8 -mx-4 sm:-mx-6 lg:-mx-8">
 
-      {/* ── Hero ──────────────────────────────────────────────────────── */}
+      {/* Hero */}
       <section className="relative overflow-hidden min-h-[88vh] flex flex-col items-center justify-center px-6 pt-28 pb-20">
         <div className="relative z-10 text-center max-w-5xl mx-auto">
-          {/* Headline */}
           <div className="relative mb-8 py-4">
             <h1 className="relative z-10 text-[3.2rem] sm:text-[4.25rem] lg:text-[5.3rem] font-black leading-[1.05] tracking-tight font-heading">
               <span className="block">Discover &amp; Run</span>
@@ -45,7 +44,6 @@ export default async function HomePage() {
             Browse, fork, and deploy automation flows — curated by the GTM community.
           </p>
 
-          {/* CTAs */}
           <div className="flex items-center justify-center gap-3 mb-12">
             <Link
               href="/flows"
@@ -61,12 +59,11 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {/* Logo Marquee */}
           <LogoMarquee />
         </div>
       </section>
 
-      {/* ── Stats ─────────────────────────────────────────────────────── */}
+      {/* Stats */}
       <section className="bg-[#121212] border-t border-dashed border-foreground/10">
         <div className="max-w-7xl mx-auto grid grid-cols-3 divide-x divide-dashed divide-foreground/10">
           {[
@@ -84,13 +81,13 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── How It Works ──────────────────────────────────────────────── */}
+      {/* How It Works */}
       <HowItWorks />
 
-      {/* ── Featured Categories ───────────────────────────────────────── */}
+      {/* Featured Categories */}
       <FeaturedCategories />
 
-      {/* ── Top Flows ─────────────────────────────────────────────────── */}
+      {/* Top Flows */}
       {topFlows && topFlows.length > 0 && (
         <section className="bg-[#121212] border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
           <div className="max-w-7xl mx-auto">
@@ -117,7 +114,7 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── Dark CTA ──────────────────────────────────────────────────── */}
+      {/* Dark CTA */}
       <section className="relative overflow-hidden bg-[#0d0d0d] px-6 sm:px-10 lg:px-16 py-16">
         <WebGLBackground variant="dark" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
@@ -151,10 +148,10 @@ export default async function HomePage() {
         </div>
       </section>
 
-      {/* ── Testimonials ──────────────────────────────────────────────── */}
+      {/* Testimonials */}
       <Testimonials />
 
-      {/* ── Recent flows showcase ─────────────────────────────────────── */}
+      {/* Recent Flows */}
       {recentFlows && recentFlows.length > 0 && (
         <section className="bg-[#121212] border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
           <div className="max-w-7xl mx-auto">
@@ -202,14 +199,13 @@ export default async function HomePage() {
         </section>
       )}
 
-      {/* ── Footer ────────────────────────────────────────────────────── */}
+      {/* Footer */}
       <Footer />
 
     </div>
   )
 }
 
-/* ── Flow tile used in the top-flows grid ────────────────────────────────── */
 function FlowTile({ flow }: { flow: Flow }) {
   return (
     <Link href={`/flows/${flow.id}`} className="block group bg-card p-6 hover:bg-white/5 transition-colors">
