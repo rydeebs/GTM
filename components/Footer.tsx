@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import Image from 'next/image'
 import { Zap, Compass, Building2, Share2, Scale, Twitter, Linkedin, Github, Mail } from 'lucide-react'
 
 const sections = [
@@ -53,7 +54,13 @@ export function Footer() {
             <div className="w-5 h-5 rounded bg-[#3b82f6]/20 flex items-center justify-center">
               <Zap className="w-3 h-3 text-[#3b82f6]" />
             </div>
-            <span className="text-sm font-semibold text-white/90 tracking-tight">RunGTM</span>
+            <Image
+              src="/logo.png"
+              alt="RunGTM"
+              width={70}
+              height={16}
+              className="h-4 w-auto"
+            />
           </div>
           
           {/* Vertical connector from trigger */}
