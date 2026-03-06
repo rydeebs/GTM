@@ -46,10 +46,10 @@
     font-feature-settings: "rlig" 1, "calt" 1;
     -webkit-font-smoothing: antialiased;
   }
-  h1, h2 {
-    font-family: var(--font-heading), monospace;
+  h1, h2, h1 *, h2 *, .font-heading, .font-heading * {
+    font-family: var(--font-heading), 'Bebas Neue', sans-serif !important;
   }
-  h3, h4, h5, h6, p, span, a, button, input, textarea, select, label, li {
+  h3, h4, h5, h6, p, a, button, input, textarea, select, label, li {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 }
