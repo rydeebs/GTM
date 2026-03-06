@@ -66,7 +66,7 @@ export function Testimonials() {
           {testimonials.map((testimonial, i) => (
             <div
               key={i}
-              className="break-inside-avoid bg-[#141414] border border-white/10 rounded-xl p-6 hover:border-white/20 transition-colors"
+              className="break-inside-avoid bg-[#141414] border border-white/10 rounded-xl p-6 transition-all duration-200 hover:border-[#3b82f6] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)]"
             >
               {/* Quote */}
               <p className="text-[15px] text-white/80 leading-relaxed mb-5">

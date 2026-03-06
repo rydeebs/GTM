@@ -28,7 +28,7 @@ export function Navbar() {
   if (scrolled) {
     return (
       <div className="fixed top-4 left-1/2 -translate-x-1/2 z-50">
-        <nav className="flex items-center gap-6 bg-white/70 backdrop-blur-md text-gray-900 rounded-full px-6 py-2.5 ring-1 ring-black/10 shadow-2xl shadow-black/10">
+        <nav className="flex items-center gap-6 bg-white/70 backdrop-blur-md text-gray-900 rounded-full px-6 py-2.5 ring-1 ring-black/10 shadow-2xl shadow-black/10 transition-all duration-200 hover:ring-[#3b82f6] hover:-translate-y-0.5 hover:shadow-[0_8px_30px_rgba(59,130,246,0.12)]">
           <Link href="/" className="flex items-center">
             <Image src="/whitelogo.png" alt="RunGTM" width={90} height={22} className="h-5 w-auto" onError={(e) => { (e.target as HTMLImageElement).src = '/logo.svg' }} />
           </Link>
