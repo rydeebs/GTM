@@ -3,6 +3,7 @@ import { ArrowRight, ArrowUp, Bookmark, GitFork } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { WebGLBackground } from '@/components/WebGLBackground'
 import { HowItWorks } from '@/components/HowItWorks'
+import { FeaturedCategories } from '@/components/FeaturedCategories'
 import type { Flow } from '@/lib/types'
 
 export default async function HomePage() {
@@ -91,6 +92,9 @@ export default async function HomePage() {
 
       {/* ── How It Works ──────────────────────────────────────────────── */}
       <HowItWorks />
+
+      {/* ── Featured Categories ───────────────────────────────────────── */}
+      <FeaturedCategories />
 
       {/* ── Top Flows ─────────────────────────────────────────────────── */}
       {topFlows && topFlows.length > 0 && (

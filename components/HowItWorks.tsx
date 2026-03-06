@@ -132,24 +132,6 @@ export function HowItWorks() {
           })}
         </div>
 
-        {/* Step indicators */}
-        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 flex items-center gap-3">
-          {steps.map((step, i) => (
-            <div
-              key={step.num}
-              className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                i === activeStep
-                  ? 'bg-[#3b82f6] scale-150'
-                  : 'bg-white/20 scale-100'
-              }`}
-            />
-          ))}
-        </div>
-
-        {/* Scroll hint */}
-        <div className="absolute bottom-6 left-1/2 -translate-x-1/2 text-[10px] uppercase tracking-widest text-white/20">
-          Scroll
-        </div>
       </div>
     </section>
   )
