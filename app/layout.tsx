@@ -22,8 +22,8 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${bebasNeue.variable} ${robotoFlex.variable}`}>
-      <body className="min-h-screen bg-background">
+    <html lang="en" className={`${bebasNeue.variable} ${robotoFlex.variable}`} suppressHydrationWarning>
+      <body className="min-h-screen bg-background antialiased">
         <Navbar />
         <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
           {children}

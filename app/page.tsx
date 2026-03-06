@@ -9,7 +9,6 @@ import { LogoMarquee } from '@/components/LogoMarquee'
 import { Footer } from '@/components/Footer'
 import type { Flow } from '@/lib/types'
 
-/* Page component */
 export default async function HomePage() {
   const supabase = await createClient()
 
