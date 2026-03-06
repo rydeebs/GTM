@@ -7,6 +7,7 @@ import { FeaturedCategories } from '@/components/FeaturedCategories'
 import { Testimonials } from '@/components/Testimonials'
 import { LogoMarquee } from '@/components/LogoMarquee'
 import { Footer } from '@/components/Footer'
+import { RotatingText } from '@/components/RotatingText'
 import type { Flow } from '@/lib/types'
 
 export default async function HomePage() {
@@ -32,16 +33,23 @@ export default async function HomePage() {
       {/* Hero */}
       <section className="relative overflow-hidden min-h-[88vh] flex flex-col items-center justify-center px-6 pt-28 pb-20">
         <div className="relative z-10 text-center max-w-5xl mx-auto">
+          {/* GitHub for GTM badge */}
+          <div className="mb-8">
+            <span className="inline-flex items-center border border-foreground/20 text-sm font-medium px-5 py-2 rounded-full text-foreground/60 bg-transparent">
+              GitHub for GTM
+            </span>
+          </div>
+
           <div className="relative mb-8 py-4">
             <h1 className="relative z-10 text-[3.2rem] sm:text-[4.25rem] lg:text-[5.3rem] font-black leading-[1.05] tracking-tight font-heading">
               <span className="block">Discover &amp; Run</span>
-              <span className="block text-foreground/25">the best</span>
+              <span className="block text-foreground/25"><RotatingText /></span>
               <span className="block">GTM Automation Flows</span>
             </h1>
           </div>
 
           <p className="text-lg text-foreground/50 max-w-xl mx-auto mb-10 leading-relaxed">
-            Github for GTM
+            Browse, Fork, and Deploy Automation Flows
           </p>
 
           <div className="flex items-center justify-center gap-3 mb-12">
