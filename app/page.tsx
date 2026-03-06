@@ -2,8 +2,14 @@ import Link from 'next/link'
 import { ArrowRight, ArrowUp, Bookmark, GitFork } from 'lucide-react'
 import { createClient } from '@/lib/supabase/server'
 import { WebGLBackground } from '@/components/WebGLBackground'
+import { HowItWorks } from '@/components/HowItWorks'
+import { FeaturedCategories } from '@/components/FeaturedCategories'
+import { Testimonials } from '@/components/Testimonials'
+import { LogoMarquee } from '@/components/LogoMarquee'
+import { Footer } from '@/components/Footer'
 import type { Flow } from '@/lib/types'
 
+/* Page component */
 export default async function HomePage() {
   const supabase = await createClient()
 
@@ -56,22 +62,13 @@ export default async function HomePage() {
             </Link>
           </div>
 
-          {/* Tool tags */}
-          <div className="flex flex-wrap items-center justify-center gap-2">
-            {['Zapier', 'Clay', 'Make', 'Apollo', 'n8n', 'HeyReach', 'Instantly', 'Smartlead'].map(tool => (
-              <span
-                key={tool}
-                className="text-xs border border-foreground/12 text-foreground/40 px-3 py-1 rounded-full"
-              >
-                {tool}
-              </span>
-            ))}
-          </div>
+          {/* Logo Marquee */}
+          <LogoMarquee />
         </div>
       </section>
 
       {/* ── Stats ─────────────────────────────────────────────────────── */}
-      <section className="border-t border-dashed border-foreground/10">
+      <section className="bg-[#121212] border-t border-dashed border-foreground/10">
         <div className="max-w-7xl mx-auto grid grid-cols-3 divide-x divide-dashed divide-foreground/10">
           {[
             { value: '500+', label: 'Automation Flows' },
@@ -88,9 +85,15 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── How It Works ──────────────────────────────────────────────── */}
+      <HowItWorks />
+
+      {/* ── Featured Categories ───────────────────────────────────────── */}
+      <FeaturedCategories />
+
       {/* ── Top Flows ─────────────────────────────────────────────────── */}
       {topFlows && topFlows.length > 0 && (
-        <section className="border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
+        <section className="bg-[#121212] border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-10">
               <div>
@@ -120,9 +123,9 @@ export default async function HomePage() {
         <WebGLBackground variant="dark" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[0.95] tracking-tight mb-5 font-heading">
-            Get one great flow,
+            Get One Flow,
             <br />
-            <span className="text-white/25 font-light italic">every single day</span>
+            <span className="text-white/25 font-light italic">Every Single Day</span>
           </h2>
           <p className="text-white/40 text-base max-w-md mx-auto mb-8 leading-relaxed">
             A hand-picked GTM automation explained in full detail, delivered to
@@ -149,9 +152,12 @@ export default async function HomePage() {
         </div>
       </section>
 
+      {/* ── Testimonials ──────────────────────────────────────────────── */}
+      <Testimonials />
+
       {/* ── Recent flows showcase ─────────────────────────────────────── */}
       {recentFlows && recentFlows.length > 0 && (
-        <section className="border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
+        <section className="bg-[#121212] border-t border-dashed border-foreground/10 px-6 sm:px-10 lg:px-16 py-16">
           <div className="max-w-7xl mx-auto">
             <div className="flex items-end justify-between mb-8">
               <div>
@@ -196,6 +202,9 @@ export default async function HomePage() {
           </div>
         </section>
       )}
+
+      {/* ── Footer ────────────────────────────────────────────────────── */}
+      <Footer />
 
     </div>
   )
