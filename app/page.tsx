@@ -4,6 +4,7 @@ import { createClient } from '@/lib/supabase/server'
 import { WebGLBackground } from '@/components/WebGLBackground'
 import { HowItWorks } from '@/components/HowItWorks'
 import { FeaturedCategories } from '@/components/FeaturedCategories'
+import { Testimonials } from '@/components/Testimonials'
 import type { Flow } from '@/lib/types'
 
 export default async function HomePage() {
@@ -128,9 +129,9 @@ export default async function HomePage() {
         <WebGLBackground variant="dark" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
           <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[0.95] tracking-tight mb-5 font-heading">
-            Get one great flow,
+            Get One Flow,
             <br />
-            <span className="text-white/25 font-light italic">every single day</span>
+            <span className="text-white/25 font-light italic">Every Single Day</span>
           </h2>
           <p className="text-white/40 text-base max-w-md mx-auto mb-8 leading-relaxed">
             A hand-picked GTM automation explained in full detail, delivered to
@@ -156,6 +157,9 @@ export default async function HomePage() {
           </div>
         </div>
       </section>
+
+      {/* ── Testimonials ──────────────────────────────────────────────── */}
+      <Testimonials />
 
       {/* ── Recent flows showcase ─────────────────────────────────────── */}
       {recentFlows && recentFlows.length > 0 && (
