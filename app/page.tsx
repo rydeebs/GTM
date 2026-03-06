@@ -29,7 +29,7 @@ export default async function HomePage() {
         <div className="relative z-10 text-center max-w-5xl mx-auto">
           {/* Headline */}
           <div className="relative mb-8 py-4">
-            <h1 className="relative z-10 text-[3.2rem] sm:text-[4.25rem] lg:text-[5.3rem] font-black leading-[1.05] tracking-tight">
+            <h1 className="relative z-10 text-[3.2rem] sm:text-[4.25rem] lg:text-[5.3rem] font-black leading-[1.05] tracking-tight font-heading">
               <span className="block">Discover &amp; Run</span>
               <span className="block text-foreground/25">the best</span>
               <span className="block">GTM Automation Flows</span>
@@ -97,7 +97,7 @@ export default async function HomePage() {
                 <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-foreground/40 mb-2">
                   Community picks
                 </p>
-                <h2 className="text-3xl font-black tracking-tight">Top Flows</h2>
+                <h2 className="text-3xl font-black tracking-tight font-heading">Top Flows</h2>
               </div>
               <Link
                 href="/flows?sort=top"
@@ -119,7 +119,7 @@ export default async function HomePage() {
       <section className="relative overflow-hidden bg-[#0d0d0d] px-6 sm:px-10 lg:px-16 py-16">
         <WebGLBackground variant="dark" />
         <div className="relative z-10 max-w-3xl mx-auto text-center">
-          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[0.95] tracking-tight mb-5">
+          <h2 className="text-3xl sm:text-4xl lg:text-5xl font-black text-white leading-[0.95] tracking-tight mb-5 font-heading">
             Get one great flow,
             <br />
             <span className="text-white/25 font-light italic">every single day</span>
@@ -158,7 +158,7 @@ export default async function HomePage() {
                 <p className="text-[11px] font-semibold tracking-[0.14em] uppercase text-foreground/40 mb-2">
                   Just added
                 </p>
-                <h2 className="text-3xl font-black tracking-tight">Recent Flows</h2>
+                <h2 className="text-3xl font-black tracking-tight font-heading">Recent Flows</h2>
               </div>
               <Link
                 href="/flows"
