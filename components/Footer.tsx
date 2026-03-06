@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import Image from 'next/image'
-import { Zap, Compass, Building2, Share2, Scale, Twitter, Linkedin, Github, Mail } from 'lucide-react'
+import { Compass, Building2, Share2, Scale, Twitter, Linkedin, Github, Mail } from 'lucide-react'
 
 const sections = [
   {
@@ -50,16 +50,13 @@ export function Footer() {
         
         {/* Trigger Node */}
         <div className="flex flex-col items-center">
-          <div className="flex items-center gap-2 bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg px-4 py-2.5 shadow-lg">
-            <div className="w-5 h-5 rounded bg-[#3b82f6]/20 flex items-center justify-center">
-              <Zap className="w-3 h-3 text-[#3b82f6]" />
-            </div>
+          <div className="flex items-center bg-[#1a1a1a] border border-[#2a2a2a] rounded-lg px-4 py-2.5 shadow-lg">
             <Image
-              src="/logo.png"
+              src="/rungtm-logo.png"
               alt="RunGTM"
-              width={70}
-              height={16}
-              className="h-4 w-auto"
+              width={90}
+              height={20}
+              className="h-5 w-auto"
             />
           </div>
           

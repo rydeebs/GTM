@@ -41,7 +41,7 @@ export default async function HomePage() {
           </div>
 
           <p className="text-lg text-foreground/50 max-w-xl mx-auto mb-10 leading-relaxed">
-            Browse, fork, and deploy automation flows — curated by the GTM community.
+            Github for GTM
           </p>
 
           <div className="flex items-center justify-center gap-3 mb-12">
